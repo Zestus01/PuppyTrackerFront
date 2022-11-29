@@ -1,9 +1,9 @@
 import {useState, useRef} from 'react';
 import axios from 'axios'
 
+const URL = 'https://8000-zestus01-puppytrackerba-c2ujgp24ze0.ws-us77.gitpod.io/dog/';
+
 export default function InputBox(props){
-    let boxNames = ['Dog Name', 'Weight', 'Height']
-    const URL = 'https://8000-zestus01-puppytrackerba-c2ujgp24ze0.ws-us77.gitpod.io/dog/';
 
     function postData(){
         axios.post(URL, {
@@ -21,7 +21,7 @@ export default function InputBox(props){
             "gender": "Female",
             "weight": 45,
             "height": 25,
-            "breed": ["Labador"]
+            "breed": ["Labrador"]
         })
     }
     function deleteData(){
@@ -30,6 +30,7 @@ export default function InputBox(props){
 
     return (
         <div>
+            <Inputs />
             <button className='btn button primary' onClick={postData}>Submit</button>
             <button onClick={patchData}>Patch?</button>
             <button onClick={deleteData}>Delete</button>
@@ -37,5 +38,37 @@ export default function InputBox(props){
     )
 }
 
+function Inputs(props){
+    const nameRef = useRef(null);
+    const weightRef = useRef(null);
+    const heightRef = useRef(null);
+    let boxNames = ['Dog Name', 'Weight', 'Height'];
+    let refNames = [nameRef, weightRef, heightRef];
+
+    function handleSubmit(){
+        let nameValue = nameRef.current.value;
+        let weightValue = parseInt(weightRef.current.value);
+        let heightValue = parseInt(heightRef.current.value);
+        console.log(nameValue);
+        console.log(weightValue);
+        console.log(typeof weightValue);
+        axios.post(URL, {
+            "name": nameValue,
+            "gender": "Female",
+            "weight": weightValue,
+            "height": heightValue,
+            "breed": ["Corgi"]
+        });
+    }
+
+    return (
+        <>
+            <button onClick={handleSubmit}>Send request?</button>
+            {boxNames.map( (box, index) => 
+                <input id={box} ref={refNames[index]} key={box} type='text' placeholder={box}></input>
+            )}
+        </>
+    )
+}
 
 
