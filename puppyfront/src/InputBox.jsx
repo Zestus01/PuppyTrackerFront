@@ -12,11 +12,28 @@ export default function InputBox(props){
             "weight": 45,
             "height": 25,
             "breed": ["Corgi"]
+        });
+    }
+
+    function patchData(){
+        axios.put(URL + '2/', {
+            "name": "Rosie",
+            "gender": "Female",
+            "weight": 45,
+            "height": 25,
+            "breed": ["Labador"]
         })
+    }
+    function deleteData(){
+        axios.delete(URL + '11/');
     }
 
     return (
-        <button className='btn button primary' onClick={postData}>Submit</button>
+        <div>
+            <button className='btn button primary' onClick={postData}>Submit</button>
+            <button onClick={patchData}>Patch?</button>
+            <button onClick={deleteData}>Delete</button>
+        </div>
     )
 }
 
