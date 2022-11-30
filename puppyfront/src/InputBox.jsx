@@ -11,7 +11,8 @@ export default function InputBox(props){
             "gender": "Female",
             "weight": 45,
             "height": 25,
-            "breed": ["Corgi"]
+            "breed": ["Corgi"],
+            "owner": ["Zestus2"]
         });
     }
 
@@ -46,18 +47,13 @@ function Inputs(props){
     let refNames = [nameRef, weightRef, heightRef];
 
     function handleSubmit(){
-        let nameValue = nameRef.current.value;
-        let weightValue = parseInt(weightRef.current.value);
-        let heightValue = parseInt(heightRef.current.value);
-        console.log(nameValue);
-        console.log(weightValue);
-        console.log(typeof weightValue);
         axios.post(URL, {
-            "name": nameValue,
+            "name": nameRef.current.value,
             "gender": "Female",
-            "weight": weightValue,
-            "height": heightValue,
-            "breed": ["Corgi"]
+            "weight": parseInt(weightRef.current.value),
+            "height": parseInt(heightRef.current.value),
+            "breed": ["Corgi"],
+            "owner": ["Zestus"]
         });
     }
 

@@ -1,3 +1,13 @@
+
+function breedString(breeds){
+    let breedStr = "";
+    breeds.map( (breed) => {
+        breedStr += breed + ' ';
+        return;
+    })
+    return breedStr;
+}
+
 export default function DogDisplay(props){
     if(!props.data){
         return;
@@ -7,7 +17,7 @@ export default function DogDisplay(props){
             <div>
                 {props.data.map( (dog) => (
                     <ul key={new Date() + dog.id} className='App'> {dog.name}
-                        <DogBreed breeds={dog.breed} />
+                        <li>{breedString(dog.breed)}</li>
                         <li>{dog.gender}</li>
                         <li>{dog.weight}</li>
                     </ul>
@@ -16,6 +26,8 @@ export default function DogDisplay(props){
         )
     }
 }
+
+
 
 function DogBreed(props){
     return (
