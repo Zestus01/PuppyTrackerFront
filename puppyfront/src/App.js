@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import DogDisplay from './DogDisplay';
 import InputBox from './InputBox';
+import Login from './Users/Login';
 import { GlobalProvider } from './authentication /GlobalState';
 import './App.css';
 
@@ -20,11 +21,13 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <GetUser />
-      <DogDisplay data={dogData}/>
-      <InputBox />
-    </div>
+    <GlobalProvider>
+      <div className="App">
+        <Login />
+        <DogDisplay data={dogData}/>
+        <InputBox />
+      </div>
+    </GlobalProvider>
   );
 }
 

@@ -56,13 +56,10 @@ client.interceptors.response.use(
         window.location.href = '/login/';
       }
     }
-
-
     // specific error handling done elsewhere
     return Promise.reject(error);
   }
 );
-
 
 /**
  * Request Wrapper with default success/error actions
