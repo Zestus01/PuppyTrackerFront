@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import DogDisplay from './DogDisplay';
 import InputBox from './InputBox';
 import Login from './Users/Login';
-import { GlobalProvider } from './authentication /GlobalState';
+import { GlobalProvider, useGlobalState } from './context/GlobalState';
 import './App.css';
 
 const URL = 'https://8000-zestus01-puppytrackerba-c2ujgp24ze0.ws-us77.gitpod.io/dog/';

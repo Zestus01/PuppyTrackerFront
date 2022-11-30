@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import AuthService from "../../services/auth.service";
+import React, { useState, useRef } from "react";
+import authService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
-import { useGlobalState } from "../../context/GlobalState";
+import { useGlobalState } from "../context/GlobalState";
 import jwtDecode from "jwt-decode";
 
 const Login = () => {
@@ -11,12 +11,12 @@ const Login = () => {
 
   const passRef = useRef(null);
   const userRef = useRef(null);
-
+  let username, password;
   const handleLogin = (e) => {
     e.preventDefault();
     username = userRef.current.value;
     password = passRef.current.value;
-    AuthService.login(username, password).then(async (resp) => {
+    authService.login(username, password).then(async (resp) => {
       let data = jwtDecode(resp.access);
       await dispatch({
         currentUserToken: resp.access,
