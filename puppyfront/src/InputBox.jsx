@@ -43,15 +43,17 @@ function Inputs(props){
     const nameRef = useRef(null);
     const weightRef = useRef(null);
     const heightRef = useRef(null);
-    let boxNames = ['Dog Name', 'Weight', 'Height'];
-    let refNames = [nameRef, weightRef, heightRef];
+    const genderRef = useRef(null);
+    let boxNames = ['Dog Name', 'Weight', 'Height'] 
+    let boxRefs = [nameRef, weightRef, heightRef]
+    let radioNames = ['Male', 'Female']
 
     function handleSubmit(){
         axios.post(URL, {
             "name": nameRef.current.value,
-            "gender": "Female",
-            "weight": parseInt(weightRef.current.value),
-            "height": parseInt(heightRef.current.value),
+            "gender": genderRef.current.value,
+            "weight": parseFloat(weightRef.current.value),
+            "height": parseFloat(heightRef.current.value),
             "breed": ["Corgi"],
             "owner": ["Zestus"]
         });
@@ -60,8 +62,16 @@ function Inputs(props){
     return (
         <>
             <button onClick={handleSubmit}>Send request?</button>
+            <label htmlFor="gender">Select the gender</label>
+            <select key="gender" name="gender" id="gender" ref={genderRef}>
+            {radioNames.map((but, index) =>
+                <>
+                    <option key={but} value={but}>{but}</option>
+                </>
+            )}
+            </select>
             {boxNames.map( (box, index) => 
-                <input id={box} ref={refNames[index]} key={box} type='text' placeholder={box}></input>
+                <input id={box} ref={boxRefs[index]} key={box} type="text" placeholder={box}></input>
             )}
         </>
     )

@@ -17,24 +17,12 @@ export default function DogDisplay(props){
             <div>
                 {props.data.map( (dog) => (
                     <ul key={new Date() + dog.id} className='App'> {dog.name}
-                        <li>{breedString(dog.breed)}</li>
-                        <li>{dog.gender}</li>
-                        <li>{dog.weight}</li>
+                        <li key={dog.id + dog.breed}>{breedString(dog.breed)}</li>
+                        <li key={dog.id + dog.gender}>{dog.gender}</li>
+                        <li key={dog.id + dog.weight + dog.height}>W: {dog.weight}  H: {dog.height}</li>
                     </ul>
                 ))}
             </div>
         )
     }
-}
-
-
-
-function DogBreed(props){
-    return (
-        <div>
-            {props.breeds.map( (breed, index) => (
-                <li key={new Date() + index}>{breed}</li>
-            ))}
-        </div>
-    )
 }
