@@ -1,11 +1,10 @@
 import React, { useState, useRef } from "react";
-import authService from "../services/auth.service";
+import AuthService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../context/GlobalState";
 import jwtDecode from "jwt-decode";
 
 const Login = () => {
-  let navigate = useNavigate();
 
   const [state, dispatch] = useGlobalState();
 
@@ -16,13 +15,12 @@ const Login = () => {
     e.preventDefault();
     username = userRef.current.value;
     password = passRef.current.value;
-    authService.login(username, password).then(async (resp) => {
+    AuthService.login(username, password).then(async (resp) => {
       let data = jwtDecode(resp.access);
       await dispatch({
         currentUserToken: resp.access,
         currentUser: data,
       });
-      navigate("/profile");
     });
   };
 
@@ -45,7 +43,6 @@ const Login = () => {
             type="password"
             id="pass"
             name="password"
-            minLength="8"
             required
             ref={passRef}
           />

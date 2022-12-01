@@ -1,5 +1,7 @@
 import {useState, useRef} from 'react';
 import axios from 'axios'
+import { useGlobalState } from './context/GlobalState';
+import request from './services/api.requests';
 
 const URL = 'https://8000-zestus01-puppytrackerba-c2ujgp24ze0.ws-us77.gitpod.io/dog/';
 
@@ -40,23 +42,41 @@ export default function InputBox(props){
 }
 
 function Inputs(props){
+
+    async function sendData() {
+      let options = {
+        url: "dog/",
+        method: "POST",
+        data: {
+            name: nameRef.current.value,
+            gender: genderRef.current.value,
+            weight: parseFloat(weightRef.current.value),
+            height: parseFloat(heightRef.current.value),
+            breed: ["Corgi"],
+            owner: [state.currentUser.username],
+        }
+      };
+      let resp = await request(options);
+    }
     const nameRef = useRef(null);
     const weightRef = useRef(null);
     const heightRef = useRef(null);
     const genderRef = useRef(null);
+    const [state, dispatch ] = useGlobalState();
     let boxNames = ['Dog Name', 'Weight', 'Height'] 
     let boxRefs = [nameRef, weightRef, heightRef]
     let radioNames = ['Male', 'Female']
 
     function handleSubmit(){
-        axios.post(URL, {
-            "name": nameRef.current.value,
-            "gender": genderRef.current.value,
-            "weight": parseFloat(weightRef.current.value),
-            "height": parseFloat(heightRef.current.value),
-            "breed": ["Corgi"],
-            "owner": ["Zestus"]
-        });
+        sendData();
+        // axios.post(URL, {
+        //     "name": nameRef.current.value,
+        //     "gender": genderRef.current.value,
+        //     "weight": parseFloat(weightRef.current.value),
+        //     "height": parseFloat(heightRef.current.value),
+        //     "breed": ["Corgi"],
+        //     "owner": [state.currentUser.username]
+        // });
     }
 
     return (
@@ -66,7 +86,7 @@ function Inputs(props){
             <select key="gender" name="gender" id="gender" ref={genderRef}>
             {radioNames.map((but, index) =>
                 <>
-                    <option key={but} value={but}>{but}</option>
+                    <option key={but + 2} value={but}>{but}</option>
                 </>
             )}
             </select>
