@@ -13,11 +13,10 @@ export default function Navbar(props){
     if(!state.currentUser){
         return (
             <>
-                <button>Hello???</button>
                 <nav>
                     <ul>
                         {loginTabs.map( (tab) => (
-                            <li onClick={ () => setPage(tab)} key={tab}>{tab}</li>
+                            <button onClick={ () => setPage(tab)} key={tab}>{tab}</button>
                         ))}
                     </ul>
                 </nav>

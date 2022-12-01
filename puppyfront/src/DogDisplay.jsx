@@ -2,7 +2,7 @@ import { useGlobalState } from "./context/GlobalState";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import request from "./services/api.requests";
-
+import InputActivity from "./InputActivity";
 
 
 function breedString(breeds) {
@@ -17,7 +17,6 @@ function breedString(breeds) {
 export default function DogDisplay(props) {
   const [state, dispatch] = useGlobalState();
   const [dogData, setDogData] = useState([]);
-  const header = state.currentUserToken; 
   
   React.useEffect(() => {
     async function getData(){
@@ -29,17 +28,19 @@ export default function DogDisplay(props) {
         }
       };
       let resp = await request(options)
-      setDogData(resp.data)
+      await dispatch ({
+        dogData: resp.data
+      });
     }
     getData();
     }, []);
-
-  // if (dogData.length === 0) {
-  //   return;
-  // } else {
+  console.log(state.dogData);
+  if (state.dogData === null || state.dogData === undefined) {
+    return;
+  } else {
     return (
       <div>
-        {dogData.map((dog) => (
+        {state.dogData.map((dog) => (
           <ul key={new Date() + dog.id} className="App">
             {dog.name}
             <li key={dog.id + dog.breed}>{breedString(dog.breed)}</li>
@@ -47,9 +48,10 @@ export default function DogDisplay(props) {
             <li key={dog.id + dog.weight + dog.height}>
               W: {dog.weight} H: {dog.height}
             </li>
+            <InputActivity id={dog.id} />
           </ul>
         ))}
       </div>
     );
   }
-
+}
