@@ -4,7 +4,6 @@ import React, { useState, useRef } from "react";
 
 function ActivityList() {
   const [state, dispatch] = useGlobalState();
-  const [activList, setActivList] = useState([]);
   React.useEffect(() => {
     async function getData() {
       let options = {
@@ -18,12 +17,28 @@ function ActivityList() {
     }
     getData();
   }, []);
-  console.log(state.activityList);
 }
 
 
 export default function InputActivity(props){
     const [state, dispatch] = useGlobalState();
+
+    function handleData(){
+      let dataObj = {
+        dog: props.id,
+        amount: amountRef.current.value,
+        activities: activRef.current.value,
+        description: descRef.current.value,
+      }
+      if(activRef.current.value === "Poop and pee"){
+        dataObj['activities'] = "Poop"
+        sendData(dataObj)
+        dataObj["activities"] = "Pee";
+        sendData(dataObj);
+      } else {
+        sendData(dataObj);
+      }
+    }
 
     const amountRef = useRef(null);
     const descRef = useRef(null);
@@ -36,22 +51,16 @@ export default function InputActivity(props){
     }
     let activityNames = ["Amount", "Description"];
     let reference = [amountRef, descRef];
-     async function sendData() {
+    async function sendData(dataObj) {
       let options = {
         url: "create/",
         method: "POST",
         data: {
-            dog: props.id,
-            amount: amountRef.current.value,
-            activities: activRef.current.value,
-            description: descRef.current.value,
-
+            ...dataObj
         },
       };
       let resp = await request(options);
     }
-    console.log('DogID');
-    console.log(props.id);
     return (
       <>
         <ActivityList />
@@ -76,7 +85,7 @@ export default function InputActivity(props){
                 placeholder={box}
             ></input>
         ))}
-        <button onClick={sendData}>Submit</button>
+        <button onClick={handleData}>Submit</button>
       </>
     );
 }

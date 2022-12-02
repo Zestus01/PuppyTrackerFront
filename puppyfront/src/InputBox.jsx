@@ -3,61 +3,68 @@ import { useGlobalState } from './context/GlobalState';
 import request from './services/api.requests';
 
 export default function InputBox(props){
-    return (
-        <div>
-            <Inputs />
-        </div>
-    )
-}
 
-function Inputs(props){
-
+    const [state, dispatch ] = useGlobalState();
     const [rerender, setRerender] = useState(true);
-    async function sendData() {
-      let options = {
-        url: "dog/",
-        method: "POST",
-        data: {
+    
+    async function sendData(props) {
+        let oldDogData = state.dogData;
+        let dogObject = {
             name: nameRef.current.value,
             gender: genderRef.current.value,
             weight: parseFloat(weightRef.current.value),
             height: parseFloat(heightRef.current.value),
+            age: ageRef.current.value,
             breed: ["Corgi"],
             owner: [state.currentUser.username],
+        };
+        let options = {
+        url: "dog/",
+        method: "POST",
+        data: {
+            ...dogObject
         }
-      };
-      let resp = await request(options);
+        };
+        let resp = await request(options);
+        props.setDogData([...props.dogData, dogObject]);
     }
-
+    
     const nameRef = useRef(null);
     const weightRef = useRef(null);
     const heightRef = useRef(null);
     const genderRef = useRef(null);
-    const [state, dispatch ] = useGlobalState();
-    let boxNames = ['Dog Name', 'Weight', 'Height'] 
-    let boxRefs = [nameRef, weightRef, heightRef]
+    const ageRef = useRef(null);
+    let boxNames = ['Dog Name', 'Weight', 'Height', "Age"] 
+    let boxRefs = [nameRef, weightRef, heightRef, ageRef]
     let radioNames = ['Male', 'Female']
 
-    function handleSubmit(){
-        sendData();
+    function handleSubmit(props){
+        sendData({...props});
+        setRerender(!rerender);
     }
 
     return (
         <>
-            <button onClick={handleSubmit}>Submit a new dog</button>
-            <label htmlFor="gender">Select the gender</label>
+            <button key="button" onClick={() => handleSubmit({...props})}>Submit a new dog</button>
+            <label key="label" htmlFor="gender">Select the gender</label>
             <select key="gender" name="gender" id="gender" ref={genderRef}>
             {radioNames.map((but, index) =>
                 <>
-                    <option key={but + 2} value={but}>{but}</option>
+                    <option key={but + 2 + index} value={but}>{but}</option>
                 </>
             )}
             </select>
             {boxNames.map( (box, index) => 
-                <input id={box} ref={boxRefs[index]} key={box} type="text" placeholder={box}></input>
+                <input id={box} ref={boxRefs[index]} key={index + new Date()} type="text" placeholder={box}></input>
             )}
         </>
     )
 }
 
+//   console.log([...oldDogData]);
+//   let newData = [dogObject, ...oldDogData ];
+//   console.log(newData);
+//     await dispatch({
+//       dogData:  dogObject
+//     });
 

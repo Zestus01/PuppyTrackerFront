@@ -3,7 +3,6 @@ import {useState} from 'react';
 
 import HandleUser from './HandleUser';
 import DogDisplay from "./DogDisplay";
-import InputBox from "./InputBox";
 
 export default function Navbar(props){
     const [page, setPage] = useState("Home");
@@ -26,17 +25,16 @@ export default function Navbar(props){
     } else {
         return (
             <>
-            <nav>
-                <ul>
-                {userTabs.map((tab) => {
-                    <li onClick={() => setPage(tab)} key={tab}>
-                    {tab}
-                    </li>;
-                })}
-                </ul>
-            </nav>
-            <DogDisplay />
-            <InputBox />
+                <nav>
+                    <ul>
+                    {userTabs.map((tab) => 
+                        <button onClick={() => setPage(tab)} key={tab}>
+                        {tab}
+                        </button>
+                    )}
+                    </ul>
+                </nav>
+                <DogDisplay />
             </>
         )
     }
