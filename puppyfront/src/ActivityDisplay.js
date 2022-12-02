@@ -57,13 +57,14 @@ function SingleActivity(props){
     return (
         <div>
             <p>
-            {activInstant["verb"]} {activ.amount} {activInstant["dimension"]}
+            {activInstant["verb"]} {activ.amount} {activInstant["dimension"]} at {activ.time}
             </p>
         </div>
     );
 }
 
 function MultipleActivities(props){
+    console.log(props.activities);
     if (props.activities.length >= 1) {
         let items = props.activities.slice(1);
         console.log(items);
@@ -75,17 +76,17 @@ function MultipleActivities(props){
                 data-bs-toggle="collapse"
                 data-bs-target={"#" + items[0]["activities"]["name"]}
                 aria-expanded="false"
-                aria-controls={"#" + items[0]["activities"]["name"]}
+                aria-controls={items[0]["activities"]["name"]}
                 >
                 More
                 </button>
-                {items.map((item, index) => (
-                <div className="collapse" id={"#" + items[0]["activities"]["name"]}>
+                <div className="collapse" id={items[0]["activities"]["name"]}>
                     <div className="card card-body">
-                    {item['activities']["verb"]} {item.amount} {item['activities']["dimension"]}
+                        {items.map((item, index) => (
+                        <p>{item['activities']["verb"]} {item.amount} {item['activities']["dimension"]} at {item.time}. It was {item.description}</p>
+                        ))}
                     </div>
                 </div>
-                ))}
             </div>
             )
         }
