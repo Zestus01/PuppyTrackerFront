@@ -1,9 +1,8 @@
-import axios from 'axios'
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { GlobalProvider, useGlobalState } from './context/GlobalState';
+import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import { GlobalProvider} from './context/GlobalState';
 import Navbar from './Navbar';
-import request from './services/api.requests';
 import './App.css';
 
 function App() {
