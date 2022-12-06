@@ -21,6 +21,7 @@ function App() {
         <Route path="dog/" element={<DogDisplay />} />
         <Route path="settings" element={<Settings />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="credits" element={<Credits />} />
       </Route>
     </Routes>
   );

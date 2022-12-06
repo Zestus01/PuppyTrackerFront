@@ -27,6 +27,9 @@ import "react-bootstrap";
 >
   Dog walking icons created by surang - Flaticon
 </a>;
+<a href="https://www.flaticon.com/free-icons/dog" title="dog icons">
+  Dog icons created by Vitaly Gorbachev - Flaticon
+</a>;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
