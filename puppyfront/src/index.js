@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import { BrowserRouter} from "react-router-dom";
+import { GlobalProvider } from "./context/GlobalState";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -8,14 +9,32 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "react-bootstrap";
 
+<a href="https://www.flaticon.com/free-icons/playing" title="playing icons">
+  Playing icons created by Freepik - Flaticon
+</a>;
+<a href="https://www.flaticon.com/free-icons/poop" title="poop icons">
+  Poop icons created by Voysla - Flaticon
+</a>;
+<a href="https://www.flaticon.com/free-icons/dog-food" title="dog food icons">
+  Dog food icons created by Freepik - Flaticon
+</a>;
+<a href="https://www.flaticon.com/free-icons/walk" title="walk icons">
+  Walk icons created by Freepik - Flaticon
+</a>;
+<a
+  href="https://www.flaticon.com/free-icons/dog-walking"
+  title="dog walking icons"
+>
+  Dog walking icons created by surang - Flaticon
+</a>;
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <GlobalProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </GlobalProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

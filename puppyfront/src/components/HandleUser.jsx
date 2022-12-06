@@ -1,5 +1,5 @@
 import Login from "./Users/Login";
-import Register from "./Users/Register";
+
 import Profile from "./Users/Profile";
 import { useGlobalState } from "./context/GlobalState";
 import { useState } from "react";
