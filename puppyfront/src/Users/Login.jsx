@@ -14,21 +14,17 @@ const Login = () => {
   const pass2Ref = useRef(null);
   const pass2ConfRef = useRef(null);
   const nameRef = useRef(null);
-  let username, password;
-  let username2, password2, password2Conf, name;
   let user = {};
 
   const handleLogin = (e) => {
     
-    username = userRef.current.value;
-    password = passRef.current.value;
-    AuthService.login(username, password).then(async (resp) => {
+    AuthService.login(userRef.current.value, passRef.current.value).then(async (resp) => {
       let data = jwtDecode(resp.access);
       await dispatch({
         currentUserToken: resp.access,
         currentUser: data,
       });
-      navigate("/home/");
+      navigate("/home/dog/");
     });
   };
 
@@ -46,7 +42,7 @@ const Login = () => {
           currentUserToken: resp.access,
           currentUser: data,
         });
-        navigate("/home/");
+        navigate("/home/dog/");
       });
     }
   };

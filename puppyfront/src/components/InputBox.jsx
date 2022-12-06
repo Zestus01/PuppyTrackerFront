@@ -44,20 +44,22 @@ export default function InputBox(props){
     }
 
     return (
-        <>
-            <button key="button" onClick={() => handleSubmit({...props})}>Submit a new dog</button>
-            <label key="label" htmlFor="gender">Select the gender</label>
-            <select key="gender" name="gender" id="gender" ref={genderRef}>
+        <div className='container-fluid row'>
+            <button className='btn col-3' key="button" onClick={() => handleSubmit({...props})}>Submit a new dog</button>
+            <label className="col-3" key="label" htmlFor="gender">Select the gender</label>
+            <select className="col-3" key="gender" name="gender" id="gender" ref={genderRef}>
             {radioNames.map((but, index) =>
                 <>
                     <option key={but + 2 + index} value={but}>{but}</option>
                 </>
             )}
             </select>
-            {boxNames.map( (box, index) => 
-                <input id={box} ref={boxRefs[index]} key={index + new Date()} type="text" placeholder={box}></input>
-            )}
-        </>
+            <div className='row'>
+                {boxNames.map( (box, index) => 
+                    <input className='form-style' id={box} ref={boxRefs[index]} key={index + box} type="text" placeholder={box}></input>
+                )}
+            </div>
+        </div>
     )
 }
 

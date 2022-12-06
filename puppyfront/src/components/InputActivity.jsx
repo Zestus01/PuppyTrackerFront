@@ -1,6 +1,7 @@
 import { useGlobalState } from "../context/GlobalState";
 import request from "../services/api.requests";
 import React, { useState, useRef } from "react";
+import ReactDOM from 'react-dom/client';
 
 function ActivityList() {
   const [state, dispatch] = useGlobalState();
@@ -63,7 +64,6 @@ export default function InputActivity(props){
     }
     return (
       <>
-        <ActivityList />
         <label htmlFor="activity">Select the activity</label>
         <select 
             key="activity" 

@@ -52,7 +52,7 @@ export default function DogDisplay(props) {
               W: {dog.weight} H: {dog.height}
             </li>
             <ActivityDisplay id={dog.id} />
-            <InputActivity id={dog.id} />
+            <InputActivity id={dog.id} /> 
           </ul>
         ))}
         <InputBox dogData={dogData} setDogData={setDogData} />
