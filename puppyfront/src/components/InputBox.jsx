@@ -1,6 +1,6 @@
 import {useState, useRef} from 'react';
-import { useGlobalState } from './context/GlobalState';
-import request from './services/api.requests';
+import { useGlobalState } from '../context/GlobalState';
+import request from '../services/api.requests';
 
 export default function InputBox(props){
 

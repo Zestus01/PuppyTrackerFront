@@ -1,17 +1,34 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useGlobalState } from "./context/GlobalState";
-import Navbar from './Navbar';
+import request from './services/api.requests';
 import './App.css';
 import Login from "./Users/Login";
 import Register from "./Users/Register"; 
 import DogDisplay from './components/DogDisplay'; 
 import Settings from './components/Settings';
-import Profile from './components/Profile';
+import Profile from './Users/Profile'
+import Header from './components/Header';
+import Credits from './components/Credits';
 
 function App() {
   const [ state, dispatch ] = useGlobalState();
+
+  // Loads in the activity list 
+  React.useEffect(() => {
+    async function getData() {
+      let options = {
+        url: "list/",
+        method: "GET",
+      };
+      let resp = await request(options);
+      await dispatch({
+        activityList: resp.data,
+      });
+    }
+    getData();
+  }, []);
 
   return (
     <Routes>

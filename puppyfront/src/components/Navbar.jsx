@@ -1,4 +1,4 @@
-import { useGlobalState } from './context/GlobalState';
+import { useGlobalState } from '../context/GlobalState';
 import {useState} from 'react';
 
 import HandleUser from './HandleUser';

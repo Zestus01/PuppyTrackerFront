@@ -1,6 +1,6 @@
 import { useGlobalState } from "../context/GlobalState";
 import React, { useState, useEffect } from "react";
-import request from "./services/api.requests";
+import request from "../services/api.requests";
 import InputActivity from "./InputActivity";
 import InputBox from "./InputBox";
 import ActivityDisplay from "./ActivityDisplay";

@@ -1,7 +1,7 @@
 import Login from "./Users/Login";
 
 import Profile from "./Users/Profile";
-import { useGlobalState } from "./context/GlobalState";
+import { useGlobalState } from "../context/GlobalState";
 import { useState } from "react";
 
 export default function HandleUser(props){

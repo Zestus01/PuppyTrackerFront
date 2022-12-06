@@ -1,5 +1,5 @@
-import { useGlobalState } from "./context/GlobalState";
-import request from "./services/api.requests";
+import { useGlobalState } from "../context/GlobalState";
+import request from "../services/api.requests";
 import React, { useState, useRef } from "react";
 
 function ActivityList() {

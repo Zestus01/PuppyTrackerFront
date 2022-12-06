@@ -1,21 +1,21 @@
-import { useGlobalState } from "./context/GlobalState";
-import request from "./services/api.requests";
+import { useGlobalState } from "../context/GlobalState";
+import request from "../services/api.requests";
 import React, { useState, useRef } from "react";
 import { format } from "date-fns";
 
 export default function ActivityDisplay(props){
-    const [activData, setActivData] = useState([]);
+    const [activityData, setActivData] = useState([]);
     const [state, dispatch] = useGlobalState();
 
-    let activNames = ['Food', 'Pee', 'Poop'];
+    let activityNames = state.activityList;
     let foodActiv = [];
     let peeActiv = [];
     let poopActiv = [];
     let activArray = [foodActiv, peeActiv, poopActiv];
 
     for(let i = 0; i < activArray.length; i++){
-        activArray[i] = activData.filter( (item) => {
-            return item['activities']['name'] === activNames[i];
+        activArray[i] = activityData.filter( (item) => {
+            return item['activities']['name'] === activityNames[i];
         });
     }
     React.useEffect(() => {
@@ -37,7 +37,7 @@ export default function ActivityDisplay(props){
         <div className="row">
             {activArray.map( (item, index) => (
                 <div className="col-4">
-                    <h5>{activNames[index]}</h5>
+                    <h5>{activityNames[index]}</h5>
                     <SingleActivity activity={item} />
                     <MultipleActivities activities={item}/>
                 </div>
@@ -52,12 +52,12 @@ function SingleActivity(props){
     if (item.length === 0){
         return;
     } 
-    let activ = item[0];
-    let activInstant = activ['activities'];
+    let activity = item[0];
+    let activityInstant = activity['activities'];
     return (
         <div>
             <p>
-            {activInstant["verb"]} {activ.amount} {activInstant["dimension"]} at {activ.time}
+            {activityInstant["verb"]} {activity.amount} {activityInstant["dimension"]} at {activity.time}
             </p>
         </div>
     );
@@ -65,7 +65,7 @@ function SingleActivity(props){
 
 function MultipleActivities(props){
     console.log(props.activities);
-    if (props.activities.length >= 1) {
+    if (props.activities.length >= 2) {
         let items = props.activities.slice(1);
         console.log(items);
         return (
