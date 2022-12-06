@@ -2,6 +2,7 @@ import { useNavigate, Outlet} from "react-router-dom";
 import { useGlobalState } from "../context/GlobalState";
 import dogDog from '../img/dogDog.png';
 import cogWheel from '../img/cogWheel.png';
+import user from "../img/user.png";
 
 export default function Header(props){
     const [state, dispatch] = useGlobalState();
@@ -33,9 +34,20 @@ export default function Header(props){
                     </div>
                     <div className="col justify-content-end">
                         <img
+                            src={user}
+                            alt="User Icon"
+                            onClick={ () => navigate('/home/profile')}
+                        />
                     </div>
                 </div>
             </div>
+            <Outlet />
+            <img
+                src={cogWheel}
+                alt="Settings"
+                id="settings-icon"
+                onClick={ () => navigate('/settings')}
+            />
         </>
     )
 }
