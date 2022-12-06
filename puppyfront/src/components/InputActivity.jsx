@@ -2,6 +2,7 @@ import { useGlobalState } from "../context/GlobalState";
 import request from "../services/api.requests";
 import React, { useState, useRef } from "react";
 import ReactDOM from 'react-dom/client';
+import Modal from 'react-bootstrap/Modal'
 
 function ActivityList() {
   const [state, dispatch] = useGlobalState();

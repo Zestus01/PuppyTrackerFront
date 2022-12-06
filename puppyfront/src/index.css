@@ -129,6 +129,14 @@ h6 span{
   transform-style: preserve-3d;
   transition: all 600ms ease-out; 
 }
+
+.modal-style{
+  background-color: #2a2b38 !important;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg') !important;
+  width: 100%;
+  height: 100%;
+}
+
 .card-front, .card-back {
   width: 100%;
   height: 100%;

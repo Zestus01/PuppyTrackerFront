@@ -33,7 +33,7 @@ export default function Header(props){
                 </div>
             </div>
             </div>
-            <div className="col justify-content-end">
+            <div className="col d-flex justify-content-end">
             <img
                 className="header-img"
                 src={user}
@@ -45,7 +45,7 @@ export default function Header(props){
         </div>
         <Outlet />
         <img
-            className="header-img"    
+            className="header-img d-flex justify-content-end"    
             src={cogWheel}
             alt="Settings"
             id="settings-icon"

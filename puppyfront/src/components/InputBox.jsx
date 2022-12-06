@@ -2,11 +2,16 @@ import {useState, useRef} from 'react';
 import { useGlobalState } from '../context/GlobalState';
 import request from '../services/api.requests';
 import { useNavigate, Outlet, redirect} from "react-router-dom";
+import Modal from 'react-bootstrap/Modal';
+
 
 export default function InputBox(props){
     const [state, dispatch ] = useGlobalState();
     const [rerender, setRerender] = useState(true);
+
+
     let navigate = useNavigate();
+
     async function sendData(props) {
         let oldDogData = state.dogData;
         let dogObject = {
@@ -44,25 +49,47 @@ export default function InputBox(props){
         navigate('');
     }
 
+    function handleClose(props){
+        props.setShow(false);
+    }
+
     return (
-            <div className='container-fluid row'>
-                <button className='btn col-3 py-2 justify-content-center align-center' key="button" onClick={() => handleSubmit({...props})}>Submit</button>
-                <label className="col-3" key="label" htmlFor="gender">Select the gender</label>
-                <select className="col-3" key="gender" name="gender" id="gender" ref={genderRef}>
-                {radioNames.map((but, index) =>
-                    <>
-                        <option key={but + 2 + index} value={but}>{but}</option>
-                    </>
-                )}
-                </select>
-                <div className='row form-group my-4'>
-                    {boxNames.map( (box, index) => 
-                        <input className='form-style col-3' id={box} ref={boxRefs[index]} key={index + box} type="text" placeholder={box}></input>
-                    )}
-                </div>
-            </div>
+            <Modal
+                show={props.show}
+                size='lg'
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header className="modal-style" closeButton onClick={() => {handleClose({...props})}}>
+                    <Modal.Title className="text-white" id="contained-modal-title-vcenter">
+                        Input the information of your new dog!
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="modal-style">
+                    <div className="row">
+                        <button className='btn col-3 py-2 justify-content-center align-center' key="button" onClick={() => handleSubmit({...props})}>Submit</button>
+                        <label className="col-3 text-white d-flex justify-content-center" key="label" htmlFor="gender">Select the gender</label>
+                        <select className="col-3 text-white modal-style" key="gender" name="gender" id="gender" ref={genderRef}>
+                        {radioNames.map((but, index) =>
+                            <>
+                                <option key={but + 2 + index} value={but}>{but}</option>
+                            </>
+                        )}
+                        </select>
+                    </div>
+                    <div className='row form-group my-4'>
+                        {boxNames.map( (box, index) => 
+                            <input className='form-style col-3' id={box} ref={boxRefs[index]} key={index + box} type="text" placeholder={box}></input>
+                        )}
+                    </div>
+                </Modal.Body>
+                <Modal.Footer className="modal-style">
+                    <button className="btn" onClick={() => handleClose({...props})}>Close</button>
+                </Modal.Footer>
+            </Modal>
     )
 }
+
 
 //   console.log([...oldDogData]);
 //   let newData = [dogObject, ...oldDogData ];

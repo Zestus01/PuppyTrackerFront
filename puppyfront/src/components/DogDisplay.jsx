@@ -18,7 +18,8 @@ function breedString(breeds) {
 export default function DogDisplay(props) {
   const [state, dispatch] = useGlobalState();
   const [dogData, setDogData] = useState([]);
-  let navigate = useNavigate();
+  const [show, setShow] = useState(false);
+
   React.useEffect(() => {
     async function getData() {
       let options = {
@@ -49,8 +50,8 @@ export default function DogDisplay(props) {
             <InputActivity id={dog.id} /> 
           </ul>
         ))}
-        <button className="btn p-1" onClick={() => navigate('input/')}>New dog?</button>
-        <Outlet />
+        <button className="btn p-1" onClick={() => setShow(true)}>New dog?</button>
+        <InputBox show={show} setShow={setShow}/>
       </div>
     );
   }
