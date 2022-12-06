@@ -50,6 +50,7 @@ export default function InputActivity(props){
             activList.push(item.name);
         })
     }
+    activList.push("Poop and pee");
     let activityNames = ["Amount", "Description"];
     let reference = [amountRef, descRef];
     async function sendData(dataObj) {
@@ -85,7 +86,7 @@ export default function InputActivity(props){
                 placeholder={box}
             ></input>
         ))}
-        <button onClick={handleData}>Submit</button>
+        <button className='btn' onClick={handleData}>Submit</button>
       </>
     );
 }

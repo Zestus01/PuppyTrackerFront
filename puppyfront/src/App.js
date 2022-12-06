@@ -11,6 +11,7 @@ import Settings from './components/Settings';
 import Profile from './Users/Profile'
 import Header from './components/Header';
 import Credits from './components/Credits';
+import InputBox from './components/InputBox';
 
 function App() {
   const [ state, dispatch ] = useGlobalState();
@@ -35,7 +36,9 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/home/" element={<Header />} >
-        <Route path="dog/" element={<DogDisplay />} />
+        <Route path="dog/" element={<DogDisplay />} >
+          <Route path="input/" element={<InputBox />} />
+        </Route>
         <Route path="settings" element={<Settings />} />
         <Route path="profile" element={<Profile />} />
         <Route path="credits" element={<Credits />} />

@@ -49,7 +49,7 @@ export default function Header(props){
             src={cogWheel}
             alt="Settings"
             id="settings-icon"
-            onClick={() => navigate("/settings")}
+            onClick={() => navigate("/home/settings")}
         />
     </>
     );
