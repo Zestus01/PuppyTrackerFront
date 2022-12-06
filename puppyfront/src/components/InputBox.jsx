@@ -5,6 +5,7 @@ import { useNavigate, Outlet, redirect} from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 
 
+
 export default function InputBox(props){
     const [state, dispatch ] = useGlobalState();
     const [rerender, setRerender] = useState(true);
@@ -39,10 +40,11 @@ export default function InputBox(props){
     const heightRef = useRef(null);
     const genderRef = useRef(null);
     const ageRef = useRef(null);
+
     let boxNames = ['Dog Name', 'Weight', 'Height', "Age"] 
     let boxRefs = [nameRef, weightRef, heightRef, ageRef]
     let radioNames = ['Male', 'Female']
-
+    
     function handleSubmit(props){
         sendData({...props});
         setRerender(!rerender);

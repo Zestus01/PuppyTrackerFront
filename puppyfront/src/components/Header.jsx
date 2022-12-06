@@ -1,6 +1,6 @@
 import { useNavigate, Outlet} from "react-router-dom";
 import { useGlobalState } from "../context/GlobalState";
-import dogDog from '../img/dogDog.png';
+import dogHusky from '../img/dogHusky.png';
 import cogWheel from '../img/cogWheel.png';
 import user from "../img/user.png";
 
@@ -12,13 +12,13 @@ export default function Header(props){
     let username = (state.currentUser ? state.currentUser.username : '');
 
     return (
-    <>
+    <div className='body-style text-white'>
         <div className="container-fluid">
         <div className="row">
             <div className="col-4">
             <img
                 className="header-img"
-                src={dogDog}
+                src={dogHusky}
                 alt="Logo"
                 id="logo"
                 onClick={() => {
@@ -51,6 +51,6 @@ export default function Header(props){
             id="settings-icon"
             onClick={() => navigate("/home/settings")}
         />
-    </>
+    </div>
     );
 }

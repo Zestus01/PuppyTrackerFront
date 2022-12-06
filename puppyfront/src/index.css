@@ -17,14 +17,9 @@ code {
   height: 10vw !important;
 }
 
-
-
-/* Please ❤ this if you like it! */
-
-
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
-body{
+.body{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;
 	font-size: 15px;
@@ -135,6 +130,13 @@ h6 span{
   background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg') !important;
   width: 100%;
   height: 100%;
+}
+
+.body-style{
+  background-color: #2a2b38 !important;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg') !important;
+  width: 100vw;
+  height: 100vh;
 }
 
 .card-front, .card-back {
@@ -314,4 +316,41 @@ h6 span{
 	height: 26px;
 	width: auto;
 	display: block;
+}
+
+.imgBtn{
+  height: 10vh;
+  width: 8vh;
+}
+
+.foodBtn {
+  background-color: salmon;
+}
+
+.foodBtn:hover{
+  background-color: darkred;
+}
+
+.bathroomBtn {
+  background-color: rgb(4, 185, 4);
+}
+
+.bathroomBtn:hover{
+  background-color: forestgreen;
+}
+
+.walkBtn{
+  background-color: skyblue;
+}
+
+.walkBtn:hover{
+  background-color: steelblue;
+}
+
+.playBtn{
+  background-color: pink;
+}
+
+.playBtn:hover{
+  background: orchid;
 }

@@ -5,6 +5,12 @@ import InputActivity from "./InputActivity";
 import InputBox from "./InputBox";
 import ActivityDisplay from "./ActivityDisplay";
 import { Outlet, useNavigate } from "react-router-dom";
+import dogFood from '../img/dogFood.png';
+import dogPlay from '../img/dogPlay.png';
+import dogPoop from '../img/dogPoop.png';
+import dogMan from '../img/dogMan.png';
+import dogWoman from '../img/dogWoman.png';
+
 
 function breedString(breeds) {
   let breedStr = "";
@@ -18,8 +24,11 @@ function breedString(breeds) {
 export default function DogDisplay(props) {
   const [state, dispatch] = useGlobalState();
   const [dogData, setDogData] = useState([]);
-  const [show, setShow] = useState(false);
 
+  const [dogShow, setDogShow] = useState(false);
+  const [activityShow, setActivityShow] = useState(false);
+  let photoArray = [dogFood, dogPoop, dogMan, dogPlay]
+  let buttonStyleClass = ['foodBtn', 'bathroomBtn', 'walkBtn', 'playBtn'];
   React.useEffect(() => {
     async function getData() {
       let options = {
@@ -42,16 +51,24 @@ export default function DogDisplay(props) {
     return;
   } else {
     return (
-      <div>
+      <div className="row container-fluid">
         {dogData.map((dog, index) => (
           <ul key={new Date() + dog.id + index} className="App">
             {dog.name}
             <ActivityDisplay id={dog.id} />
-            <InputActivity id={dog.id} /> 
+            <InputActivity setShow={setActivityShow} show={activityShow} id={dog.id} />
+            <div className="container-fluid row d-flex justify-content-center">
+            {photoArray.map((buttonImage, index) => {
+              return(
+                  <input type="image" className={"imgBtn col-2 mx-2 " + buttonStyleClass[index]} src={buttonImage} onClick={() => setActivityShow(true)}/>
+              )})}
+            </div>
           </ul>
         ))}
-        <button className="btn p-1" onClick={() => setShow(true)}>New dog?</button>
-        <InputBox show={show} setShow={setShow}/>
+        <div className="container row d-flex justify-content-center">
+          <button className="btn p-1 col-6" onClick={() => setDogShow(true)}>New dog?</button>
+        </div>
+        <InputBox show={dogShow} setShow={setDogShow}/>
       </div>
     );
   }
