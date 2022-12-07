@@ -16,6 +16,7 @@ function timeDifference(time, dateFormat, splitChar){
     nowDate = formatInTimeZone(nowDate, 'America/New_York', dateFormat).split(splitChar);
     for(let i = 0; i < time.length; i++){
             holder = (parseInt(nowDate[i]) - parseInt(time[i]));
+            console.log(holder);
             if(holder < 0){
                 timeDiff[i - 1] -= 1;
                 holder += 60;

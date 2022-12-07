@@ -13,7 +13,7 @@ import Credits from './components/Credits';
 
 
 function App() {
-  const [dispatch ] = useGlobalState();
+  const [,dispatch ] = useGlobalState();
 
   // Loads in the activity list 
   useEffect(() => {
