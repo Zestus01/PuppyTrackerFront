@@ -49,6 +49,7 @@ export default function InputActivity(props){
   let dimensionList = [];
   let selectedActivity = [];
   let placeholderItem;
+  
   if(state.activityList){
       state.activityList.map( (item) => {
         if(item.name !== props.selection){
