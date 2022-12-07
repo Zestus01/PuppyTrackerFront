@@ -1,7 +1,36 @@
 import { useGlobalState } from "../context/GlobalState";
 import request from "../services/api.requests";
 import React, { useState, useRef } from "react";
-import { format } from "date-fns";
+import { formatInTimeZone } from 'date-fns-tz'
+import { parse } from "date-fns";
+
+
+
+function formatDate(time){
+    return formatInTimeZone(time, 'America/New_York', 'yyyy-MM-dd HH:mm:ss zzz');
+}
+
+function dateDifference(time){
+
+}
+
+function timeDifference(time, dateFormat, splitChar){
+    let nowDate = new Date();
+    let timeDiff = [];
+    let holder;
+    time = formatInTimeZone(time, 'America/New_York', dateFormat).split(splitChar);
+    nowDate = formatInTimeZone(nowDate, 'America/New_York', dateFormat).split(splitChar);
+    for(let i = 0; i < time.length; i++){
+            holder = (parseInt(nowDate[i]) - parseInt(time[i]));
+            if(holder < 0){
+                timeDiff[i - 1] -= 1;
+                holder += 60;
+            }
+            timeDiff.push(holder);
+    }
+    return timeDiff.join(':');
+}
+// 2:2:1  0:27:8  2:1:41
 
 export default function ActivityDisplay(props){
     const [activityData, setActivityData] = useState([]);
@@ -73,13 +102,34 @@ function SingleActivity(props){
     let activity = item[0];
     let activityInstant = activity['activities'];
     return (
-            <p key={props.dogID + activity.name}>
-                {activityInstant["verb"]} {activity.amount} {activityInstant["dimension"]} at {activity.time}
+        <>
+            <p 
+                key={"Time diff" + activity.name + props.dogID}
+            >
+                Last record is:
             </p>
+            <p key={activity.name + "year diff"}>     
+                {timeDifference(activity.time, 'yyyy-MM-dd', '-')} YY-MM-DD
+            </p>
+            <p key={activity.name + "hour diff"}>
+                {timeDifference(activity.time, 'HH:mm:ss', ':')} HH:MM:SS ago
+            </p>    
+            
+            <p 
+                key={props.dogID + activity.name}
+            >
+                {activityInstant["verb"]}&nbsp;
+                {activity.amount}&nbsp; 
+                {activityInstant["dimension"]} at&nbsp; 
+                {formatDate(activity.time)}
+            </p>
+        </>   
     );
 }
 
 function MultipleActivities(props){
+
+
     if (props.activities.length >= 2) {
         let items = props.activities.slice(1);
         return (
@@ -103,7 +153,10 @@ function MultipleActivities(props){
                         className="card card-body d-flex justify-content-center text-black"
                     >
                         {items.map((item, index) => (
-                            <p key={props.id + item.time}>{item['activities']["verb"]} {item.amount} {item['activities']["dimension"]} at {item.time}. It was {item.description}</p>
+                            
+                            <p key={props.id + item.time}>
+                                {item['activities']["verb"]} {item.amount} {item['activities']["dimension"]} at {formatDate(item.time)}. It was {item.description}
+                                </p>
                         ))}
                     </div>
                 </div>

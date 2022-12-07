@@ -78,7 +78,7 @@ export default function InputBox(props){
                     <div className="row" key="row-div">
                         <button 
                             className='btn col-3 py-2 justify-content-center align-center' 
-                            key="button" 
+                            key="button-submit" 
                             onClick={() => handleSubmit({...props})}
                         >
                             Submit
@@ -116,7 +116,7 @@ export default function InputBox(props){
                                 className='form-style col-3' 
                                 id={box} 
                                 ref={boxRefs[index]} 
-                                key={index + box}
+                                key={index + box + new Date()}
                                 type="text" 
                                 placeholder={box}
                             />
