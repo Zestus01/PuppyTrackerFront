@@ -36,12 +36,11 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/home/" element={<Header />} >
-        <Route path="dog/" element={<DogDisplay />} >
-          <Route path="input/" element={<InputBox />} />
+        <Route path="dog/" element={<DogDisplay />} />
+        <Route path="settings" element={<Settings />} >
+          <Route path="credits" element={<Credits />} />
         </Route>
-        <Route path="settings" element={<Settings />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="credits" element={<Credits />} />
       </Route>
     </Routes>
   );

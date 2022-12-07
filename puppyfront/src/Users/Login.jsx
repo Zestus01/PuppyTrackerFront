@@ -28,14 +28,14 @@ const Login = () => {
     });
   };
 
-  const handleRegister = (e) => {
+  async function handleRegister(e){
     if(pass2Ref.current.value === pass2ConfRef.current.value){
       user = {
         username: user2Ref.current.value,
         password: pass2Ref.current.value,
         first_name: nameRef.current.value,
       }
-      AuthService.register(user);
+      await AuthService.register(user);
       AuthService.login(user2Ref.current.value, pass2Ref.current.value).then(async (resp) => {
         let data = jwtDecode(resp.access);
         await dispatch({
