@@ -24,11 +24,14 @@ function breedString(breeds) {
 export default function DogDisplay(props) {
   const [state, dispatch] = useGlobalState();
   const [dogData, setDogData] = useState([]);
+  const [selected, setSelected] = useState(''); // Helps with autopopulating the activity input
 
   const [dogShow, setDogShow] = useState(false);
   const [activityShow, setActivityShow] = useState(false);
+  let selectedOptions = ['Food', 'Pee', 'Walk', 'Playtime']; 
   let photoArray = [dogFood, dogPoop, dogMan, dogPlay]
   let buttonStyleClass = ['foodBtn', 'bathroomBtn', 'walkBtn', 'playBtn'];
+
   React.useEffect(() => {
     async function getData() {
       let options = {
@@ -51,22 +54,48 @@ export default function DogDisplay(props) {
     return;
   } else {
     return (
-      <div className="row container-fluid">
+      <div key="main-dog-div" className="row container-fluid">
         {dogData.map((dog, index) => (
-          <ul key={new Date() + dog.id + index} className="App">
+          <h3 
+            key={new Date() + dog.id + index} 
+            className="App"
+          >
             {dog.name}
-            <ActivityDisplay id={dog.id} />
-            <InputActivity setShow={setActivityShow} show={activityShow} id={dog.id} />
+          
+            <ActivityDisplay 
+              id={dog.id} 
+            />
+            <InputActivity 
+              setShow={setActivityShow} 
+              show={activityShow} 
+              id={dog.id}
+              selection={selected} 
+            />
             <div className="container-fluid row d-flex justify-content-center">
-            {photoArray.map((buttonImage, index) => {
+            {photoArray.map((buttonImage, index2) => {
               return(
-                  <input type="image" className={"imgBtn col-2 mx-2 " + buttonStyleClass[index]} src={buttonImage} onClick={() => setActivityShow(true)}/>
+                  <input 
+                    type="image" 
+                    key={"activity-modal" + index + index2} 
+                    className={"imgBtn col-2 mx-2 " + buttonStyleClass[index2]} 
+                    src={buttonImage} 
+                    onClick={() => {
+                      setSelected(selectedOptions[index2]);
+                      setActivityShow(true);
+                    }}
+                  />
               )})}
             </div>
-          </ul>
+          </h3>
         ))}
         <div className="container row d-flex justify-content-center">
-          <button className="btn p-1 col-6" onClick={() => setDogShow(true)}>New dog?</button>
+          <button 
+            key="new-dog-modal" 
+            className="btn p-1 col-6" 
+            onClick={() => setDogShow(true)}
+          >
+            New dog?
+          </button>
         </div>
         <InputBox show={dogShow} setShow={setDogShow}/>
       </div>

@@ -62,31 +62,75 @@ export default function InputBox(props){
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header className="modal-style" closeButton onClick={() => {handleClose({...props})}}>
-                    <Modal.Title className="text-white" id="contained-modal-title-vcenter">
+                <Modal.Header 
+                    className="modal-style" 
+                    closeButton onClick={() => {handleClose({...props})}}
+                    key="modal-x-btn"
+                >
+                    <Modal.Title 
+                        className="text-white" 
+                        id="contained-modal-title-vcenter"
+                    >
                         Input the information of your new dog!
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="modal-style">
-                    <div className="row">
-                        <button className='btn col-3 py-2 justify-content-center align-center' key="button" onClick={() => handleSubmit({...props})}>Submit</button>
-                        <label className="col-3 text-white d-flex justify-content-center" key="label" htmlFor="gender">Select the gender</label>
-                        <select className="col-3 text-white modal-style" key="gender" name="gender" id="gender" ref={genderRef}>
+                    <div className="row" key="row-div">
+                        <button 
+                            className='btn col-3 py-2 justify-content-center align-center' 
+                            key="button" 
+                            onClick={() => handleSubmit({...props})}
+                        >
+                            Submit
+                        </button>
+                        <label 
+                            className="col-3 text-white d-flex justify-content-center"
+                            key="label"
+                            htmlFor="gender"
+                        >
+                            Select the gender
+                        </label>
+                        <select 
+                            className="col-3 text-white modal-style" 
+                            key="gender" 
+                            name="gender" 
+                            id="gender" 
+                            ref={genderRef}
+                        >
                         {radioNames.map((but, index) =>
                             <>
-                                <option key={but + 2 + index} value={but}>{but}</option>
+                                <option 
+                                    key={but + 2 + index} 
+                                    value={but}
+                                >
+                                        {but}
+                                </option>
                             </>
                         )}
+                            
                         </select>
                     </div>
-                    <div className='row form-group my-4'>
+                    <div className='row form-group my-4' key="form-div">
                         {boxNames.map( (box, index) => 
-                            <input className='form-style col-3' id={box} ref={boxRefs[index]} key={index + box} type="text" placeholder={box}></input>
+                            <input 
+                                className='form-style col-3' 
+                                id={box} 
+                                ref={boxRefs[index]} 
+                                key={index + box}
+                                type="text" 
+                                placeholder={box}
+                            />
                         )}
                     </div>
                 </Modal.Body>
                 <Modal.Footer className="modal-style">
-                    <button className="btn" onClick={() => handleClose({...props})}>Close</button>
+                    <button 
+                        className="btn" 
+                        onClick={() => handleClose({...props})}
+                        key="close-dog-btn"
+                    >
+                        Close
+                    </button>
                 </Modal.Footer>
             </Modal>
     )

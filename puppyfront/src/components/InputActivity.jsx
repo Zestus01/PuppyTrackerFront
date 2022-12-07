@@ -67,6 +67,7 @@ export default function InputActivity(props){
     let activList = [];
     if(state.activityList){
         state.activityList.map( (item) => {
+          if(item.name !== props.selection)
             activList.push(item.name);
         })
     }
@@ -83,13 +84,25 @@ export default function InputActivity(props){
         aria-labelledby="contained-modal-title-vcenter"
         centered
         >
-          <Modal.Header closeButton onClick={() => handleClose({...props})} className="modal-style">
-            <Modal.Title id="contained-modal-title-vcenter" className="text-white">
+          <Modal.Header 
+            closeButton onClick={() => handleClose({...props})} 
+            className="modal-style"
+          >
+            <Modal.Title 
+              id="contained-modal-title-vcenter" 
+              className="text-white"
+            >
               Record your pet's activity
             </Modal.Title>
           </Modal.Header>
           <Modal.Body className="modal-style">
-            <label htmlFor="activity" className="text-white col-6">Select the activity</label>
+            <label 
+              key="activityLabel" 
+              htmlFor="activity" 
+              className="text-white col-6"
+            >
+              Select the activity
+            </label>
             <select 
                 className="modal-style text-white"
                 key="activity" 
@@ -101,6 +114,9 @@ export default function InputActivity(props){
                         {but}
                     </option>
                 ))}
+                <option key="selected" selected value={props.selection}>
+                  {props.selection}
+                </option>
             </select>
             <div className="row container-fluid">
               {activityNames.map((box, index) => (
@@ -111,13 +127,25 @@ export default function InputActivity(props){
                       key={box}
                       type="text"
                       placeholder={box}
-                  ></input>
+                  />
               ))}
             </div>
-            <button className='btn' onClick={() => handleData({...props})}>Submit</button>
+            <button 
+              className='btn' 
+              onClick={() => handleData({...props})}
+              key="modal-submit-btn"
+            >
+              Submit
+            </button>
           </Modal.Body>
           <Modal.Footer className="modal-style">
-            <button className="btn" onClick={() => handleClose({...props})}>Close</button>
+            <button 
+              className="btn" 
+              onClick={() => handleClose({...props})}
+              key="modal-close-btn"
+            >
+              Close
+            </button>
           </Modal.Footer>
       </Modal>
     );

@@ -48,7 +48,7 @@ const Login = () => {
   };
 
   return (
-  <div>
+  <div className="body-style text-white">
     <div className="section">
       <div className="container">
         <div className="row full-height justify-content-center">
