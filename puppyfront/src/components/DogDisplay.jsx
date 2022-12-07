@@ -102,11 +102,3 @@ export default function DogDisplay(props) {
     );
   }
 }
- /// Saving this for when I need to refrence these values
-{/* <li key={index + dog.id + dog.breed + new Date()}>
-  {breedString(dog.breed)}
-</li>
-<li key={dog.id + index + dog.gender + new Date()}>{dog.gender}</li>
-<li key={dog.id + dog.weight + index + dog.height + new Date()}>
-  W: {dog.weight} H: {dog.height}
-</li> */}
