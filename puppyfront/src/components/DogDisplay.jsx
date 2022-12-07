@@ -71,7 +71,7 @@ export default function DogDisplay(props) {
               id={dog.id}
               selection={selected} 
             />
-            <div className="container-fluid row d-flex justify-content-center">
+            <div className="container-fluid row d-flex justify-content-center my-3">
             {photoArray.map((buttonImage, index2) => {
               return(
                   <input 

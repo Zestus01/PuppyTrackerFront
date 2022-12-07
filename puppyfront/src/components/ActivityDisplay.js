@@ -8,29 +8,29 @@ export default function ActivityDisplay(props){
     const [state, dispatch] = useGlobalState();
 
     let activityArray = {
-        food: [],
-        pee: [],
-        poop: [],
-        walk: [],
-        play: [],
+        Food: [],
+        Pee: [],
+        Poop: [],
+        Walk: [],
+        Play: [],
     }
 
     for(let item of activityData){
         switch(item['activities']['name']){
             case 'Playtime':
-                activityArray.play.push(item);
+                activityArray.Play.push(item);
                 break;
             case "Food":
-                activityArray.food.push(item);
+                activityArray.Food.push(item);
                 break;
             case "Pee":
-                activityArray.pee.push(item);
+                activityArray.Pee.push(item);
                 break;
             case "Poop": 
-                activityArray.poop.push(item);
+                activityArray.Poop.push(item);
                 break;
             case "Walk":
-                activityArray.walk.push(item);
+                activityArray.Walk.push(item);
                 break;
         }
     }
@@ -66,12 +66,10 @@ export default function ActivityDisplay(props){
 }
 
 function SingleActivity(props){
-    // console.log('hello');
     let item = props.activity;
     if (item.length === 0){
         return;
     } 
-    console.log('Hi there')
     let activity = item[0];
     let activityInstant = activity['activities'];
     return (
@@ -84,7 +82,6 @@ function SingleActivity(props){
 function MultipleActivities(props){
     if (props.activities.length >= 2) {
         let items = props.activities.slice(1);
-        console.log(items);
         return (
             <div>
                 <button
@@ -103,7 +100,7 @@ function MultipleActivities(props){
                     id={items[0]["activities"]["name"]}
                 >
                     <div 
-                        className="card card-body d-flex justify-content-center"
+                        className="card card-body d-flex justify-content-center text-black"
                     >
                         {items.map((item, index) => (
                             <p key={props.id + item.time}>{item['activities']["verb"]} {item.amount} {item['activities']["dimension"]} at {item.time}. It was {item.description}</p>
