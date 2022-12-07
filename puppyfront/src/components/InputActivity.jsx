@@ -1,12 +1,12 @@
 import { useGlobalState } from "../context/GlobalState";
 import request from "../services/api.requests";
-import React, { useState, useRef } from "react";
-import ReactDOM from 'react-dom/client';
+import React, { useRef } from "react";
+
 import Modal from 'react-bootstrap/Modal'
 
 
 export default function InputActivity(props){
-  const [state, dispatch] = useGlobalState();
+  const [state] = useGlobalState();
 
   function handleData(props){
       let dataObj = {
@@ -19,7 +19,7 @@ export default function InputActivity(props){
         dataObj['activities'] = "Poop";
         sendData(dataObj, {...props});
         dataObj["activities"] = "Pee";
-        sendData(dataObj), {...props};
+        sendData((dataObj), {...props});
       } else {
         sendData(dataObj, {...props});
       }
@@ -34,7 +34,7 @@ export default function InputActivity(props){
             ...dataObj
         },
       };
-      let resp = await request(options);
+      await request(options);
       handleClose({...props});
     }
     
@@ -57,6 +57,7 @@ export default function InputActivity(props){
         } else {
           placeholderItem = item;
         }
+        return item;
       })
   }
   activList.push("Poop and pee");

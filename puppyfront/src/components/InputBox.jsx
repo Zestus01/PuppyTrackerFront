@@ -1,20 +1,19 @@
 import {useState, useRef} from 'react';
 import { useGlobalState } from '../context/GlobalState';
 import request from '../services/api.requests';
-import { useNavigate, Outlet, redirect} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 
 
 
 export default function InputBox(props){
-    const [state, dispatch ] = useGlobalState();
+    const [state] = useGlobalState();
     const [rerender, setRerender] = useState(true);
 
 
     let navigate = useNavigate();
 
     async function sendData(props) {
-        let oldDogData = state.dogData;
         let dogObject = {
             name: nameRef.current.value,
             gender: genderRef.current.value,
@@ -31,7 +30,7 @@ export default function InputBox(props){
             ...dogObject
         }
         };
-        let resp = await request(options);
+        await request(options);
         props.setDogData([...props.dogData, dogObject]);
     }
     

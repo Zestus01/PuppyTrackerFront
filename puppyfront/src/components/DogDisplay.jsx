@@ -1,25 +1,24 @@
 import { useGlobalState } from "../context/GlobalState";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import request from "../services/api.requests";
 import InputActivity from "./InputActivity";
 import InputBox from "./InputBox";
 import ActivityDisplay from "./ActivityDisplay";
-import { Outlet, useNavigate } from "react-router-dom";
 import dogFood from '../img/dogFood.png';
 import dogPlay from '../img/dogPlay.png';
 import dogPoop from '../img/dogPoop.png';
 import dogMan from '../img/dogMan.png';
-import dogWoman from '../img/dogWoman.png';
+// import dogWoman from '../img/dogWoman.png';
 
 
-function breedString(breeds) {
-  let breedStr = "";
-  breeds.map((breed) => {
-    breedStr += breed + " ";
-    return;
-  });
-  return breedStr;
-}
+// function breedString(breeds) {
+//   let breedStr = "";
+//   breeds.map((breed) => {
+//     breedStr += breed + " ";
+//     return;
+//   });
+//   return breedStr;
+// }
 
 export default function DogDisplay(props) {
   const [state, dispatch] = useGlobalState();
@@ -32,7 +31,7 @@ export default function DogDisplay(props) {
   let photoArray = [dogFood, dogPoop, dogMan, dogPlay]
   let buttonStyleClass = ['foodBtn', 'bathroomBtn', 'walkBtn', 'playBtn'];
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function getData() {
       let options = {
         url: "dog/",
@@ -48,7 +47,7 @@ export default function DogDisplay(props) {
       setDogData(resp.data);
     }
     getData();
-  }, []);
+  }, [dispatch, state.currentUser.user_id]);
 
   if (dogData.length === 0) {
     return;
@@ -75,7 +74,8 @@ export default function DogDisplay(props) {
             {photoArray.map((buttonImage, index2) => {
               return(
                   <input 
-                    type="image" 
+                    type="image"
+                    alt={selectedOptions[index2]} 
                     key={"activity-modal" + index + index2} 
                     className={"imgBtn col-2 mx-2 " + buttonStyleClass[index2]} 
                     src={buttonImage} 

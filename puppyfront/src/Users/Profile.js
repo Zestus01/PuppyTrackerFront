@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import request from "../services/api.requests";
 
 const Profile = () => {
-  const [state, dispatch] = useGlobalState();
+  const [state] = useGlobalState();
   let navigate = useNavigate();
   let dogData = (state.dogData ? state.dogData : []);
 
@@ -18,11 +18,12 @@ const Profile = () => {
       url: "edit/dog/" + id + '/',
       method: "DELETE",
       };
-      let resp = await request(options);
+      await request(options);
   }
 
   function handleDelete(id){
-
+    
+    sendDelete(id);
   }
 
   return (
@@ -30,7 +31,7 @@ const Profile = () => {
       <h1 >Welcome</h1>
       <h2 >{state.currentUser.username}</h2>
       <h2 >{state.currentUser.first_name} {state.currentUser.last_name}</h2>
-      {dogData.map( (dog) => {
+      {dogData.map( (dog, index) => {
         return(
           <div>
             <h3 

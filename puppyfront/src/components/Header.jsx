@@ -5,7 +5,7 @@ import cogWheel from '../img/cogWheel.png';
 import user from "../img/user.png";
 
 export default function Header(props){
-    const [state, dispatch] = useGlobalState();
+    const [state] = useGlobalState();
 
     let navigate = useNavigate();
 

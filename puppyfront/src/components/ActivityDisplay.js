@@ -1,17 +1,11 @@
-import { useGlobalState } from "../context/GlobalState";
 import request from "../services/api.requests";
-import React, { useState, useRef } from "react";
+import {useEffect ,useState} from "react";
 import { formatInTimeZone } from 'date-fns-tz'
-import { parse } from "date-fns";
 
 
 
 function formatDate(time){
     return formatInTimeZone(time, 'America/New_York', 'yyyy-MM-dd HH:mm:ss zzz');
-}
-
-function dateDifference(time){
-
 }
 
 function timeDifference(time, dateFormat, splitChar){
@@ -30,11 +24,10 @@ function timeDifference(time, dateFormat, splitChar){
     }
     return timeDiff.join(':');
 }
-// 2:2:1  0:27:8  2:1:41
+
 
 export default function ActivityDisplay(props){
     const [activityData, setActivityData] = useState([]);
-    const [state, dispatch] = useGlobalState();
 
     let activityArray = {
         Food: [],
@@ -61,10 +54,12 @@ export default function ActivityDisplay(props){
             case "Walk":
                 activityArray.Walk.push(item);
                 break;
+            default:
+                break;
         }
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         async function getData() {
         let options = {
             url: "nested/",
@@ -77,7 +72,7 @@ export default function ActivityDisplay(props){
         setActivityData(resp.data);
         }
         getData();
-    }, []);
+    }, [props.id]);
 
     return (
         <div key="main-activity-div" className="row my-2">

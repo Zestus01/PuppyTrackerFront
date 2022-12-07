@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useRef } from "react";
 import AuthService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../context/GlobalState";
@@ -6,7 +6,7 @@ import jwtDecode from "jwt-decode";
 
 const Login = () => {
   let navigate = useNavigate();
-  const [state, dispatch] = useGlobalState();
+  const [dispatch] = useGlobalState();
 
   const passRef = useRef(null);
   const userRef = useRef(null);
