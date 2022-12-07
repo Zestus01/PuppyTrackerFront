@@ -29,6 +29,7 @@ import "react-bootstrap";
 <a href="https://www.flaticon.com/free-icons/dog" title="dog icons">
   Dog icons created by Vitaly Gorbachev - Flaticon
 </a>;
+<a href="https://www.flaticon.com/free-icons/chart" title="chart icons">Chart icons created by DinosoftLabs - Flaticon</a>
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

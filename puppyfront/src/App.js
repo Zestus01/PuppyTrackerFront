@@ -10,6 +10,9 @@ import Settings from './components/Settings';
 import Profile from './Users/Profile'
 import Header from './components/Header';
 import Credits from './components/Credits';
+import ActivityCharts from './charts/ActivityCharts';
+
+// Think about using links to navigate backwards instead of navigates
 
 
 function App() {
@@ -36,6 +39,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/home/" element={<Header />} >
         <Route path="dog/" element={<DogDisplay />} />
+        <Route path="chart/" element={<ActivityCharts />} />
         <Route path="settings" element={<Settings />} >
           <Route path="credits" element={<Credits />} />
         </Route>

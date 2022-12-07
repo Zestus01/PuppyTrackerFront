@@ -3,6 +3,7 @@ import { useGlobalState } from "../context/GlobalState";
 import dogHusky from '../img/dogHusky.png';
 import cogWheel from '../img/cogWheel.png';
 import user from "../img/user.png";
+import bar_chart from "../img/bar_chart.png";
 
 export default function Header(props){
     const [state] = useGlobalState();
@@ -24,6 +25,13 @@ export default function Header(props){
                     onClick={() => {
                     navigate("/home/dog");
                     }}
+                />
+                <img
+                    className="header-img"
+                    src={bar_chart}
+                    alt="Chart"
+                    id="chart"
+                    onClick={() => navigate("/home/chart")}
                 />
                 </div>
                 <div className="col d-flex justify-content-end">

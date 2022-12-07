@@ -48,6 +48,9 @@ export default function Credits(){
         >
           Profile icons created by Freepik - Flaticon
         </a>
+        <a href="https://www.flaticon.com/free-icons/chart" title="chart icons">
+          Chart icons created by DinosoftLabs - Flaticon
+        </a>
       </>
     );
 }
