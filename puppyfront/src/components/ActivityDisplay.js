@@ -125,7 +125,7 @@ function SingleActivity(props){
 }
 
 function MultipleActivities(props){
-
+    
     const [open, setOpen] = useState(false);
     if (props.activities.length >= 2) {
         let items = props.activities.slice(1);

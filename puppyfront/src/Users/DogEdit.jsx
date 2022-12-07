@@ -18,7 +18,7 @@ export default function DogEdit(props){
         let options = {
             url: attribute + '/',
             method: "Post",
-            body: {
+            data: {
                 ...dataObj
             }
 
@@ -31,11 +31,10 @@ export default function DogEdit(props){
         let options = {
             url: "edit/dog/" + props.dog.id + '/',
             method: "PUT",
-            body: {
+            data: {
                 ...dataObj
             },
         };
-        console.log(options.body);
         await request(options);
         handleClose({...props});
     }
