@@ -1,22 +1,47 @@
-import axios from 'axios'
-import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom/client';
-import DogDisplay from './DogDisplay';
+import {useEffect} from 'react';
+import { Routes, Route} from "react-router-dom";
+import { useGlobalState } from "./context/GlobalState";
+import request from './services/api.requests';
 import './App.css';
+import Login from "./Users/Login";
+import Register from "./Users/Register"; 
+import DogDisplay from './components/DogDisplay'; 
+import Settings from './components/Settings';
+import Profile from './Users/Profile'
+import Header from './components/Header';
+import Credits from './components/Credits';
 
-const URL = 'https://8000-zestus01-puppytrackerba-c2ujgp24ze0.ws-us77.gitpod.io/dog/';
 
 function App() {
-  const [dogData, setDogData] = useState(null);
+  const [dispatch ] = useGlobalState();
 
-  React.useEffect(() =>{
-    axios.get(URL).then((response) => setDogData(response.data));
-  }, []);
+  // Loads in the activity list 
+  useEffect(() => {
+    async function getData() {
+      let options = {
+        url: "list/",
+        method: "GET",
+      };
+      let resp = await request(options);
+      await dispatch({
+        activityList: resp.data,
+      });
+    }
+    getData();
+  }, [dispatch]);
 
   return (
-    <div className="App">
-      <DogDisplay data={dogData}/>
-    </div>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/home/" element={<Header />} >
+        <Route path="dog/" element={<DogDisplay />} />
+        <Route path="settings" element={<Settings />} >
+          <Route path="credits" element={<Credits />} />
+        </Route>
+        <Route path="profile" element={<Profile />} />
+      </Route>
+    </Routes>
   );
 }
 
