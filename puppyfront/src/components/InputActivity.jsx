@@ -59,7 +59,6 @@ export default function InputActivity(props){
         }
       })
   }
-  console.log(placeholderItem);
   activList.push("Poop and pee");
   dimensionList.push('Size')
   if(placeholderItem){

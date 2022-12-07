@@ -7,21 +7,34 @@ export default function ActivityDisplay(props){
     const [activityData, setActivityData] = useState([]);
     const [state, dispatch] = useGlobalState();
 
-    let activityNames = state.activityList;
-    let foodActivity = [];
-    let peeActivity = [];
-    let poopActivity = [];
-    let walkActivity = []
-    let playActivity = [];
-    let activArray = [foodActivity, peeActivity, poopActivity, walkActivity, playActivity];
-
-    for(let i = 0; i < activArray.length; i++){
-        activArray[i] = activityData.filter( (item) => {
-            // console.log(item['activities']['name']);
-            // console.log(activityNames[i]);
-            return item['activities']['name'] === activityNames[i];
-        });
+    let activityArray = {
+        food: [],
+        pee: [],
+        poop: [],
+        walk: [],
+        play: [],
     }
+
+    for(let item of activityData){
+        switch(item['activities']['name']){
+            case 'Playtime':
+                activityArray.play.push(item);
+                break;
+            case "Food":
+                activityArray.food.push(item);
+                break;
+            case "Pee":
+                activityArray.pee.push(item);
+                break;
+            case "Poop": 
+                activityArray.poop.push(item);
+                break;
+            case "Walk":
+                activityArray.walk.push(item);
+                break;
+        }
+    }
+
     React.useEffect(() => {
         async function getData() {
         let options = {
@@ -36,22 +49,20 @@ export default function ActivityDisplay(props){
         }
         getData();
     }, []);
-    // console.log(activityData);
+
     return (
         <div key="main-activity-div" className="row">
-            {activArray.map( (item, index) => {
-                // {console.log("map item", item)}
-                return (
-                    <div key={index + 'div'} className="col-4">
-                        <h5 key={"activity-h5" + activityNames[index]['name']}>{activityNames[index]['name']}</h5>
-                        <SingleActivity activity={item} dogID={props.id}/>
-                        <MultipleActivities activities={item} dogID={props.id}/>
+            {Object.entries(activityArray).map( ([key, value]) =>{
+                return(
+                    <div key={key + 'div'} className="col-4">
+                        <h5 key={"activity-h5" + key}>{key}</h5>
+                        <SingleActivity activity={value} dogID={props.id}/>
+                        <MultipleActivities activities={value} dogID={props.id}/>
                     </div>
-                )} 
-            )}
+                )
+            })}
         </div>
     )
-
 }
 
 function SingleActivity(props){
@@ -60,7 +71,7 @@ function SingleActivity(props){
     if (item.length === 0){
         return;
     } 
-    // console.log('Hi there')
+    console.log('Hi there')
     let activity = item[0];
     let activityInstant = activity['activities'];
     return (
@@ -71,7 +82,6 @@ function SingleActivity(props){
 }
 
 function MultipleActivities(props){
-    console.log("Multiple activ", props);
     if (props.activities.length >= 2) {
         let items = props.activities.slice(1);
         console.log(items);
