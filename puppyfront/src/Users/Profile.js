@@ -12,6 +12,7 @@ const Profile = () => {
   let dogData = (state.dogData ? state.dogData : []);
   const [showDelete, setDeleteShow] = useState(false);
   const [showEdit, setEditShow] = useState(false);
+  const [stateDog, setStateDog] = useState();
 
   function logout(){
     localStorage.clear() 
@@ -42,10 +43,22 @@ const Profile = () => {
               </h2>
               <h5 key={"dog" + dog.id + dog.weight}> W: {dog.weight} </h5>
               <h5 key={dog.id + dog.weight}> H: {dog.height} </h5>
-              <button className="btn mx-2" key={"edit-btn" + dog.id + index} onClick={handleEdit}>Edit</button>
-              <button className="btn mx-2" key={"delete-btn" + dog.id + index} onClick={handleDelete}>DELETE</button>
-              <DogDelete show={showDelete} setShow={setDeleteShow} id={dog.id} />
-              <DogEdit show={showEdit} setShow={setEditShow} dog={dog} />
+              <button className="btn mx-2" key={"edit-btn" + dog.id + index} onClick={ () => {
+                setStateDog(dog);
+                handleEdit()
+              }}
+                >
+                  Edit
+                </button>
+              <button className="btn mx-2" key={"delete-btn" + dog.id + index} onClick={ () =>{
+                setStateDog(dog);
+                handleDelete();
+              }}
+                >
+                  DELETE
+                </button>
+              <DogDelete show={showDelete} setShow={setDeleteShow} id={stateDog.id} />
+              <DogEdit show={showEdit} setShow={setEditShow} dog={stateDog} />
             </div>    
           )
         })}

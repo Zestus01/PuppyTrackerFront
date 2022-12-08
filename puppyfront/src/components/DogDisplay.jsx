@@ -48,7 +48,7 @@ export default function DogDisplay(props) {
       setDogData(resp.data);
     }
     getData();
-  }, [dispatch, state.currentUser.user_id]);
+  }, []);
 
   if (dogData.length === 0) {
     return;
