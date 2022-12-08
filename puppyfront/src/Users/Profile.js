@@ -14,7 +14,7 @@ const Profile = () => {
   const [showEdit, setEditShow] = useState(false);
 
   function logout(){
-    localStorage.clear()
+    localStorage.clear() 
     navigate("/");
   }
 

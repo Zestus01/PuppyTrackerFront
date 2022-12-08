@@ -29,7 +29,7 @@ export default function ActivityCharts(props){
         setActivityData(resp.data);
         }
         getData({...props});
-    }, [activityData]);
+    }, [props.id]);
 
     for(let item of activityData){
         switch(item['activities']['name']){

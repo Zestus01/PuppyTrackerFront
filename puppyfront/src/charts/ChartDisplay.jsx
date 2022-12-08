@@ -1,9 +1,12 @@
 import ActivityCharts from "./ActivityCharts";
 import StatCharts from "./StatCharts";
 import DurationCharts from './DurationCharts';
+import { useEffect, useState } from "react";
 
 export default function ChartDisplay(props){
 
+
+    
     switch(props.chart){
         case 'Activity Counts':
             return <ActivityCharts id={props.id} />
