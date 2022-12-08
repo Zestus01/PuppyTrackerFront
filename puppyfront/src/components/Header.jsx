@@ -1,5 +1,4 @@
 import { useNavigate, Outlet} from "react-router-dom";
-import { useGlobalState } from "../context/GlobalState";
 import dogHusky from '../img/dogHusky.png';
 import cogColor from '../img/cogColor.png';
 import userColor from "../img/userColor.png";

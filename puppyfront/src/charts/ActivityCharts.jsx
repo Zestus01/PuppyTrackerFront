@@ -3,13 +3,12 @@ import { useGlobalState } from "../context/GlobalState";
 import request from "../services/api.requests";
 import { useState, useEffect } from "react";
 import {Chart, Legend, Tooltip, ArcElement } from "chart.js";
-import DogSelectionModal from "./DogSelectionModal";
+
 
 export default function ActivityCharts(props){
-    const [state] = useGlobalState();
+    
     const [activityData, setActivityData] = useState([]);
-    const [id, setID] = useState(0);
-    const [show, setShow] = useState(false);
+
     let activityCount = {
         Food: 0,
         Pee: 0,
@@ -18,18 +17,18 @@ export default function ActivityCharts(props){
         Playtime: 0,
     }
     useEffect(() => {
-        async function getData() {
-        let options = {
-            url: "nested/",
-            method: "GET",
-            params: {
-            dog__id: id,
-            },
-        };
+        async function getData(props) {
+            let options = {
+                url: "nested/",
+                method: "GET",
+                params: {
+                dog__id: props.id,
+                },
+            };
         let resp = await request(options);
         setActivityData(resp.data);
         }
-        getData();
+        getData({...props});
     }, [activityData]);
 
     for(let item of activityData){
@@ -53,7 +52,9 @@ export default function ActivityCharts(props){
                 break;
         }
     }
+
     Chart.register(Legend, Tooltip, ArcElement);
+    
     const pieData = {
         labels: Object.keys(activityCount),
         datasets: [
@@ -79,10 +80,9 @@ export default function ActivityCharts(props){
             }
         ]
     }
+
     return (
         <>
-            <button className="btn" onClick={() => setShow(!show)}>Select Dog</button>
-            <DogSelectionModal setID={setID} show={show} setShow={setShow} />
             <Doughnut data={pieData} />
         </>
     )

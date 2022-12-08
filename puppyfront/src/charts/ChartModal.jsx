@@ -1,10 +1,7 @@
-import { useGlobalState } from "../context/GlobalState";
-import { Modal } from "react-bootstrap";
-import { useRef } from "react";
+import Modal from 'react-bootstrap/Modal';
+import { useRef } from 'react';
 
-export default function DogSelectionModal(props){
-    const [state] = useGlobalState();
-    const selectionRef = useRef(null);
+export default function ChartModal(props){
     const chartRef = useRef(null);
     let chartChoices = [
         'Activity Counts',
@@ -13,14 +10,12 @@ export default function DogSelectionModal(props){
         'Height Changes',
         'Weight Changes',
     ];
-    let dogData = (state.dogData ? state.dogData : []);
 
     function handleClose(props){
         props.setShow(false);
     }
 
     function handleSelection(props){
-        props.setID(selectionRef.current.value);
         props.setChart(chartRef.current.value);
         handleClose({...props});
     }
@@ -31,48 +26,23 @@ export default function DogSelectionModal(props){
                 size='lg'
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
-                key="modal-dog-selection-chart"
+                key="modal-chart-selection-chart"
             >
                 <Modal.Header 
                     className="modal-style" 
                     closeButton onClick={() => {handleClose({...props})}}
-                    key="modal-x-btn-selection"
+                    key="modal-x-btn-charts"
                 >
                     <Modal.Title 
                         className="text-white" 
                         id="contained-modal-title-vcenter"
-                        key="modal-title-dog-selection"
+                        key="modal-title-chart-selection"
                     >
-                        Select the dog
+                        Chart Selection
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="modal-style" key="modal-body-dog-selection">
-                    <div className="row" key="row-div-selection-dog">
-                        <label 
-                            className="col-3 text-white d-flex justify-content-center"
-                            key="label-selection"
-                            htmlFor="selection"
-                        >
-                            Select which dog
-                        </label>
-                        <select 
-                            className="col-3 text-white modal-style" 
-                            key="dog-select" 
-                            name="selection" 
-                            id="selection" 
-                            ref={selectionRef}
-                        >
-                        {dogData.map( (dog) => (
-                            <>
-                                <option 
-                                    key={"selection-" + dog} 
-                                    value={dog.id}
-                                >
-                                        {dog.name}
-                                </option>
-                            </>
-                        ))}
-                        </select>
+                <Modal.Body className="modal-style" key="modal-body-chart-selection">
+                    <div className="row" key="row-div-selection-chart">
                         <label 
                             className="col-3 text-white d-flex justify-content-center"
                             key="chart-selection"
@@ -101,18 +71,18 @@ export default function DogSelectionModal(props){
                         </select>
                         <button 
                             className='btn col-3 py-2 justify-content-center align-center' 
-                            key="button-submit-dog" 
+                            key="button-submit-chart" 
                             onClick={() => handleSelection({...props})}
                         >
                             Submit
                         </button>
                     </div>
                 </Modal.Body>
-                <Modal.Footer className="modal-style" key="modal-footer-dog-input">
+                <Modal.Footer className="modal-style" key="modal-footer-chart-input">
                     <button 
                         className="btn" 
                         onClick={() => handleClose({...props})}
-                        key="close-dog-btn-modal"
+                        key="close-chart-btn-modal"
                     >
                         Close
                     </button>

@@ -10,9 +10,7 @@ import Settings from './components/Settings';
 import Profile from './Users/Profile'
 import Header from './components/Header';
 import Credits from './components/Credits';
-import ActivityCharts from './charts/ActivityCharts';
 import ChartSelection from './charts/ChartSelection';
-import StatCharts from './charts/StatCharts';
 
 
 // Think about using links to navigate backwards instead of navigates
@@ -20,7 +18,7 @@ import StatCharts from './charts/StatCharts';
 
 function App() {
   const [,dispatch ] = useGlobalState();
-
+  
   // Loads in the activity list 
   useEffect(() => {
     async function getData() {
@@ -42,10 +40,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/home/" element={<Header />} >
         <Route path="dog/" element={<DogDisplay />} />
-        <Route path="chart/" element={<ChartSelection />}>
-          <Route path="activity" elemet={<ActivityCharts />} />
-          <Route path="stats" element={<StatCharts />} />
-        </Route>
+        <Route path="chart/" element={<ChartSelection />} />
         <Route path="settings" element={<Settings />} >
           <Route path="credits" element={<Credits />} />
         </Route>
@@ -56,3 +51,4 @@ function App() {
 }
 
 export default App;
+
