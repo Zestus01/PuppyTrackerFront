@@ -27,6 +27,7 @@ export default function DogDisplay(props) {
 
   const [dogShow, setDogShow] = useState(false);
   const [activityShow, setActivityShow] = useState(false);
+  const [dogID, setDogID] = useState(0);
   let selectedOptions = ['Food', 'Pee', 'Walk', 'Playtime']; 
   let photoArray = [dogFood, dogPoop, dogMan, dogPlay]
   let buttonStyleClass = ['foodBtn', 'bathroomBtn', 'walkBtn', 'playBtn'];
@@ -67,7 +68,7 @@ export default function DogDisplay(props) {
             <InputActivity 
               setShow={setActivityShow} 
               show={activityShow} 
-              id={dog.id}
+              id={dogID}
               selection={selected} 
             />
             <div className="container-fluid row d-flex justify-content-center my-3">
@@ -76,11 +77,12 @@ export default function DogDisplay(props) {
                   <input 
                     type="image"
                     alt={selectedOptions[index2]} 
-                    key={"activity-modal" + index + index2} 
+                    key={"activity-modal" + index + index2 + dog.id} 
                     className={"imgBtn col-2 mx-2 " + buttonStyleClass[index2]} 
                     src={buttonImage} 
                     onClick={() => {
                       setSelected(selectedOptions[index2]);
+                      setDogID(dog.id);
                       setActivityShow(true);
                     }}
                   />

@@ -1,7 +1,6 @@
 import ActivityCharts from "./ActivityCharts";
 import StatCharts from "./StatCharts";
 import DurationCharts from './DurationCharts';
-import { useEffect, useState } from "react";
 
 export default function ChartDisplay(props){
 

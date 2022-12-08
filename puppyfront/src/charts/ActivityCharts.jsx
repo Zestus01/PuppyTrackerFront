@@ -1,5 +1,4 @@
 import {Doughnut} from "react-chartjs-2";
-import { useGlobalState } from "../context/GlobalState";
 import request from "../services/api.requests";
 import { useState, useEffect } from "react";
 import {Chart, Legend, Tooltip, ArcElement } from "chart.js";
@@ -29,7 +28,7 @@ export default function ActivityCharts(props){
         setActivityData(resp.data);
         }
         getData({...props});
-    }, [props.id]);
+    }, [props]);
 
     for(let item of activityData){
         switch(item['activities']['name']){

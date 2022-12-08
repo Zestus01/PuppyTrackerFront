@@ -2,14 +2,13 @@ import { useGlobalState } from "../context/GlobalState";
 import { Modal } from "react-bootstrap";
 import { useRef } from "react";
 
-export default function DogSelectionModal(props){
+export default function ChartSelectionModal(props){
     const [state] = useGlobalState();
     const selectionRef = useRef(null);
     const chartRef = useRef(null);
     let chartChoices = [
         'Activity Counts',
-        'Walk Duration',
-        'Playtime Duration',
+        'Walk/Playtime Duration',
         'Height Changes',
         'Weight Changes',
     ];
