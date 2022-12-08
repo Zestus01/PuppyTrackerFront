@@ -1,4 +1,4 @@
-import {Pie} from "react-chartjs-2";
+import {Doughnut} from "react-chartjs-2";
 import { useGlobalState } from "../context/GlobalState";
 import request from "../services/api.requests";
 import { useState, useEffect } from "react";
@@ -35,7 +35,7 @@ export default function ActivityCharts(props){
     for(let item of activityData){
         switch(item['activities']['name']){
             case 'Playtime':
-                activityCount.Play += 1;
+                activityCount.Playtime += 1;
                 break;
             case "Food":
                 activityCount.Food += 1;
@@ -83,7 +83,7 @@ export default function ActivityCharts(props){
         <>
             <button className="btn" onClick={() => setShow(!show)}>Select Dog</button>
             <DogSelectionModal setID={setID} show={show} setShow={setShow} />
-            <Pie data={pieData} />
+            <Doughnut data={pieData} />
         </>
     )
 }

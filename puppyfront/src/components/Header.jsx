@@ -1,9 +1,9 @@
 import { useNavigate, Outlet} from "react-router-dom";
 import { useGlobalState } from "../context/GlobalState";
 import dogHusky from '../img/dogHusky.png';
-import cogWheel from '../img/cogWheel.png';
-import user from "../img/user.png";
-import bar_chart from "../img/bar_chart.png";
+import cogColor from '../img/cogColor.png';
+import userColor from "../img/userColor.png";
+import bar_chartColor from "../img/bar_chartColor.png";
 
 export default function Header(props){
     let navigate = useNavigate();
@@ -24,7 +24,7 @@ export default function Header(props){
                 />
                 <img
                     className="header-img"
-                    src={bar_chart}
+                    src={bar_chartColor}
                     alt="Chart"
                     id="chart"
                     onClick={() => navigate("/home/chart")}
@@ -33,7 +33,7 @@ export default function Header(props){
                 <div className="col d-flex justify-content-end">
                     <img
                         className="header-img"
-                        src={user}
+                        src={userColor}
                         alt="User Icon"
                         onClick={() => navigate("/home/profile")}
                     />
@@ -43,7 +43,7 @@ export default function Header(props){
         <Outlet />
         <img
             className="header-img d-flex justify-content-end"    
-            src={cogWheel}
+            src={cogColor}
             alt="Settings"
             id="settings-icon"
             onClick={() => navigate("/home/settings")}
