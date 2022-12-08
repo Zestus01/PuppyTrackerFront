@@ -330,11 +330,11 @@ h6 span{
 }
 
 .foodBtn {
-  background-color: salmon;
+  background-color: rgb(250, 128, 114);
 }
 
 .foodBtn:hover{
-  background-color: darkred;
+  background-color: rgb(139, 0, 0);
 }
 
 .bathroomBtn {
@@ -342,21 +342,22 @@ h6 span{
 }
 
 .bathroomBtn:hover{
-  background-color: forestgreen;
+  background-color: rgb(34, 139, 34);
 }
 
 .walkBtn{
-  background-color: skyblue;
+  background-color: rgb(150, 225, 255)
 }
 
 .walkBtn:hover{
-  background-color: steelblue;
+  background-color: rgb(70, 130, 180);
 }
 
 .playBtn{
-  background-color: pink;
+  background-color: rgb(255, 192, 203);
 }
 
 .playBtn:hover{
-  background: orchid;
+  background: rgb(218, 112, 214);
 }
+

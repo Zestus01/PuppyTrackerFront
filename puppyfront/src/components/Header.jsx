@@ -6,11 +6,7 @@ import user from "../img/user.png";
 import bar_chart from "../img/bar_chart.png";
 
 export default function Header(props){
-    const [state] = useGlobalState();
-
     let navigate = useNavigate();
-
-    let username = (state.currentUser ? state.currentUser.username : '');
 
     return (
     <div className='body-style text-white'>
