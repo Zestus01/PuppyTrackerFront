@@ -77,7 +77,7 @@ export default function ActivityDisplay(props){
         <div key="main-activity-div" className="row my-1">
             {Object.entries(activityArray).map( ([key, value]) =>{
                 return(
-                    <div key={key + 'div'} className="col-4 my-2">
+                    <div key={key + 'div'} className="col-6 col-sm-4 my-2">
                         <h5 key={"activity-h5" + key}>{key}</h5>
                         <SingleActivity activity={value} dogID={props.id}/>
                         <MultipleActivities activities={value} dogID={props.id}/>

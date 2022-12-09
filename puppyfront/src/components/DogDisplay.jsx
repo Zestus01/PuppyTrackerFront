@@ -93,7 +93,7 @@ export default function DogDisplay(props) {
         <div className="container row d-flex justify-content-center">
           <button 
             key="new-dog-modal" 
-            className="btn p-1 col-6" 
+            className="btn p-1 col-8 col-sm-6" 
             onClick={() => setDogShow(true)}
           >
             New dog?
