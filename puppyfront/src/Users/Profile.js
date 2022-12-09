@@ -28,7 +28,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="text-center">
+    <div className="text-center col-12 col-sm-6">
       <h2 key="welcome" >Welcome {state.currentUser.username}</h2>
       <h2 key="username">{state.currentUser.username}</h2>
       <h2 key='names'>{state.currentUser.first_name} {state.currentUser.last_name}</h2>

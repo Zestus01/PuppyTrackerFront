@@ -77,21 +77,21 @@ export default function InputBox(props){
                 <Modal.Body className="modal-style" key="modal-body-dog-input">
                     <div className="row" key="row-div-input-dog">
                         <button 
-                            className='btn col-3 py-2 justify-content-center align-center' 
+                            className='btn col-4 col-sm-6 py-2 justify-content-center align-center' 
                             key="button-submit-dog" 
                             onClick={() => handleSubmit({...props})}
                         >
                             Submit
                         </button>
                         <label 
-                            className="col-3 text-white d-flex justify-content-center"
+                            className="col-4 col-sm-6 text-white d-flex justify-content-center"
                             key="label-gender"
                             htmlFor="gender"
                         >
                             Select the gender
                         </label>
                         <select 
-                            className="col-3 text-white modal-style" 
+                            className="col-3 col-sm-6 text-white modal-style" 
                             key="gender-select" 
                             name="gender" 
                             id="gender" 

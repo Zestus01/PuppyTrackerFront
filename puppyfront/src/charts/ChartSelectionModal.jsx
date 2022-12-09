@@ -73,14 +73,14 @@ export default function ChartSelectionModal(props){
                         ))}
                         </select>
                         <label 
-                            className="col-3 text-white d-flex justify-content-center"
+                            className="col-4 col-sm-4 text-white d-flex justify-content-center"
                             key="chart-selection"
                             htmlFor="selection"
                         >
                             Select which chart
                         </label>
                         <select 
-                            className="col-3 text-white modal-style" 
+                            className="col-6 col-sm-4 text-white modal-style" 
                             key="chart-select" 
                             name="selection" 
                             id="selection" 
@@ -99,7 +99,7 @@ export default function ChartSelectionModal(props){
                             
                         </select>
                         <button 
-                            className='btn col-3 py-2 justify-content-center align-center' 
+                            className='btn col-6 col-sm-4 py-2 d-flex justify-content-end align-center' 
                             key="button-submit-dog" 
                             onClick={() => handleSelection({...props})}
                         >

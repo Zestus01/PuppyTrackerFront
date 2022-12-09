@@ -74,7 +74,7 @@ export default function ActivityDisplay(props){
     }, [props.id]);
 
     return (
-        <div key="main-activity-div" className="row my-1">
+        <div key="main-activity-div" className="row col-6 my-1">
             {Object.entries(activityArray).map( ([key, value]) =>{
                 return(
                     <div key={key + 'div'} className="col-6 col-sm-4 my-2">

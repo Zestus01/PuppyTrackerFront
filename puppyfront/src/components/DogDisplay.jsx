@@ -10,16 +10,6 @@ import dogPoop from '../img/dogPoop.png';
 import dogMan from '../img/dogMan.png';
 // import dogWoman from '../img/dogWoman.png';
 
-
-// function breedString(breeds) {
-//   let breedStr = "";
-//   breeds.map((breed) => {
-//     breedStr += breed + " ";
-//     return;
-//   });
-//   return breedStr;
-// }
-
 export default function DogDisplay(props) {
   const [state, dispatch] = useGlobalState();
   const [dogData, setDogData] = useState([]);
