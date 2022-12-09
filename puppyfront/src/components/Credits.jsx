@@ -1,4 +1,5 @@
-
+// Dog breed info - https://api-ninjas.com/api/dogs
+// Dog breed list - https://github.com/ElliottLandsborough/dog-ceo-api
 
 export default function Credits(){
     
