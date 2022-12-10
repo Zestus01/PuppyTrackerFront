@@ -12,7 +12,7 @@ const Profile = () => {
   let dogData = (state.dogData ? state.dogData : []);
   const [showDelete, setDeleteShow] = useState(false);
   const [showEdit, setEditShow] = useState(false);
-  const [stateDog, setStateDog] = useState();
+  const [stateDog, setStateDog] = useState(dogData[0]);
 
   function logout(){
     localStorage.clear() 
@@ -28,7 +28,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="text-center col-12 col-sm-6">
+    <div className="justify-content-center text-center col-12">
       <h2 key="welcome" >Welcome {state.currentUser.username}</h2>
       <h2 key="username">{state.currentUser.username}</h2>
       <h2 key='names'>{state.currentUser.first_name} {state.currentUser.last_name}</h2>

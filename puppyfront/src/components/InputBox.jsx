@@ -1,4 +1,4 @@
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import { useGlobalState } from '../context/GlobalState';
 import request from '../services/api.requests';
 import { useNavigate} from "react-router-dom";
@@ -9,7 +9,19 @@ import Modal from 'react-bootstrap/Modal';
 export default function InputBox(props){
     const [state] = useGlobalState();
     const [rerender, setRerender] = useState(true);
+    const [breedList, setBreedList] = useState([]);
 
+    useEffect(() => {
+        async function getData() {
+          let options = {
+            url: "breedlist/",
+            method: "GET",
+          };
+          let resp = await request(options);
+          setBreedList(resp.data[0]['name']);
+        }
+        getData();
+      }, []);
 
     let navigate = useNavigate();
 
@@ -20,7 +32,7 @@ export default function InputBox(props){
             weight: parseFloat(weightRef.current.value),
             height: parseFloat(heightRef.current.value),
             age: ageRef.current.value,
-            breed: ["Corgi"],
+            breed: [breedRef.current.value],
             owner: [state.currentUser.user_id],
         };
         let options = {
@@ -38,8 +50,9 @@ export default function InputBox(props){
     const heightRef = useRef(null);
     const genderRef = useRef(null);
     const ageRef = useRef(null);
+    const breedRef = useRef(null);
 
-    let boxNames = ['Dog Name', 'Weight', 'Height', "Age"] 
+    let boxNames = ['Dog Name', 'Weight: Pounds', 'Height: Inches', "Age"] 
     let boxRefs = [nameRef, weightRef, heightRef, ageRef]
     let radioNames = ['Male', 'Female']
     
@@ -75,41 +88,65 @@ export default function InputBox(props){
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="modal-style" key="modal-body-dog-input">
-                    <div className="row" key="row-div-input-dog">
-                        <button 
-                            className='btn col-4 col-sm-6 py-2 justify-content-center align-center' 
-                            key="button-submit-dog" 
-                            onClick={() => handleSubmit({...props})}
-                        >
-                            Submit
-                        </button>
-                        <label 
-                            className="col-4 col-sm-6 text-white d-flex justify-content-center"
-                            key="label-gender"
-                            htmlFor="gender"
-                        >
-                            Select the gender
-                        </label>
-                        <select 
-                            className="col-3 col-sm-6 text-white modal-style" 
-                            key="gender-select" 
-                            name="gender" 
-                            id="gender" 
-                            ref={genderRef}
-                        >
-                        {radioNames.map((but, index) =>
-                            <>
-                                <option 
-                                    key={"gender-" + but} 
-                                    value={but}
-                                >
-                                        {but}
-                                </option>
-                            </>
-                        )}
-                            
-                        </select>
-                    </div>
+                    <div className="row justify-content-end" key="row-div-input-dog">
+                            <button 
+                                className='btn col-6 col-sm-4 py-2 justify-content-center align-center' 
+                                key="button-submit-dog" 
+                                onClick={() => handleSubmit({...props})}
+                            >
+                                Submit
+                            </button>
+                            <label 
+                                className="col-6 col-sm-4 text-white d-flex justify-content-center"
+                                key="label-gender"
+                                htmlFor="gender"
+                            >
+                                Select the gender
+                            </label>
+                            <select 
+                                className="col-6 col-sm-4 text-white modal-style" 
+                                key="gender-select" 
+                                name="gender" 
+                                id="gender" 
+                                ref={genderRef}
+                            >
+                            {radioNames.map((but, index) =>
+                                <>
+                                    <option 
+                                        key={"gender-" + but} 
+                                        value={but}
+                                    >
+                                            {but}
+                                    </option>
+                                </>
+                            )}
+                            </select>
+                            <label 
+                                className="col-6 col-sm-4 text-white d-flex justify-content-center"
+                                key="label-breed"
+                                htmlFor="breed"
+                            >
+                                Select the breed
+                            </label>
+                            <select 
+                                className="col-6 col-sm-4 text-white modal-style" 
+                                key="breed-select" 
+                                name="breed" 
+                                id="breed" 
+                                ref={breedRef}
+                            >
+                            {breedList.map((name, index) =>
+                                <>
+                                    <option 
+                                        key={"breed-" + name} 
+                                        value={name}
+                                    >
+                                            {name}
+                                    </option>
+                                </>
+                            )}
+                            </select>
+                        </div>
                     <div className='row form-group my-4' key="form-div">
                         {boxNames.map( (box, index) => 
                             <input 

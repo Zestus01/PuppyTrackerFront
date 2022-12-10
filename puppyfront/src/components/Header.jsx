@@ -3,7 +3,6 @@ import dogHusky from '../img/dogHusky.png';
 import cogColor from '../img/cogColor.png';
 import userColor from "../img/userColor.png";
 import bar_chartColor from "../img/bar_chartColor.png";
-import CheckAPI from "../dogAPI/check";
 
 export default function Header(props){
     let navigate = useNavigate();
@@ -39,7 +38,6 @@ export default function Header(props){
                     />
                 </div>
             </div>
-            <button className="btn" onClick={CheckAPI}>API CHECK</button>
         </div>
         <Outlet />
         <img

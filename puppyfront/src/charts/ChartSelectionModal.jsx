@@ -11,6 +11,7 @@ export default function ChartSelectionModal(props){
         'Walk/Playtime Duration',
         'Height Changes',
         'Weight Changes',
+        'Breed Comparison'
     ];
     let dogData = (state.dogData ? state.dogData : []);
 
@@ -19,7 +20,7 @@ export default function ChartSelectionModal(props){
     }
 
     function handleSelection(props){
-        props.setID(selectionRef.current.value);
+        props.setDog(selectionRef.current.value);
         props.setChart(chartRef.current.value);
         handleClose({...props});
     }
@@ -65,7 +66,7 @@ export default function ChartSelectionModal(props){
                             <>
                                 <option 
                                     key={"selection-" + dog} 
-                                    value={dog.id}
+                                    value={dog}
                                 >
                                         {dog.name}
                                 </option>

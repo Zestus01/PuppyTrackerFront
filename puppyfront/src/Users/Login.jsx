@@ -32,7 +32,7 @@ const Login = () => {
       user = {
         username: user2Ref.current.value,
         password: pass2Ref.current.value,
-        first_name: nameRef.current.value,
+        firstName: nameRef.current.value,
       }
       AuthService.register(user);
       navigate("/home/dog/");

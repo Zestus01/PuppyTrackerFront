@@ -44,7 +44,7 @@ export default function DogDisplay(props) {
     return;
   } else {
     return (
-      <div key="main-dog-div" className="row container-fluid">
+      <div key="main-dog-div" className="row justify-content-center container-fluid">
         {dogData.map((dog, index) => (
           <h3 
             key={new Date() + dog.id + index} 
@@ -68,7 +68,7 @@ export default function DogDisplay(props) {
                     type="image"
                     alt={selectedOptions[index2]} 
                     key={"activity-modal" + index + index2 + dog.id} 
-                    className={"imgBtn col-2 mx-2 " + buttonStyleClass[index2]} 
+                    className={"imgBtn col-1 col-sm-4 mx-2 header-im " + buttonStyleClass[index2]} 
                     src={buttonImage} 
                     onClick={() => {
                       setSelected(selectedOptions[index2]);
