@@ -13,21 +13,85 @@ import { useEffect, useState } from 'react';
 
 
 export default function BreedComparisonChart(props){
-    const [breedData, setBreedData] = useState([]);
+    const [breedData, setBreedData] = useState({});
 
+    ChartJS.register(
+        CategoryScale,
+        LinearScale,
+        BarElement,
+        Title,
+        Tooltip,
+        Legend
+    )
+    console.log(Object.entries(props.dog));
+    console.log(props.dog['breed']);
+    console.log(props.dog['breed'][0]);
     useEffect(() => {
         async function getData(props) {
             let options = {
-                url: "nested/",
+                url: "breed/" + props.dog.breed,
                 method: "GET",
-                params: {
-                dog__id: props.id,
-                },
             };
         let resp = await request(options);
-        setActivityData(resp.data);
+        setBreedData(resp.data);
         }
         getData({...props});
     }, [props]);
+    
+    let minWeight, minHeight, maxHeight, maxWeight;
+    for(const [key, value] of Object.entries(breedData)){
+        if(key.includes(props.dog.gender.toLowerCase())){
+            if(key.includes('min_weight')){
+                minWeight = value
+            }
+            if(key.includes('min_height')){
+                minHeight = value
+            }
+            if(key.includes('max_weight')){
+                maxWeight = value
+            }
+            if(key.includes('max_height')){
+                maxHeight = value
+            }
+        }
+    }
+    let mins = [minWeight, minHeight];
+    let maxes = [maxWeight, maxHeight];
 
+    const options = {
+        responsive: true,
+        plugins: {
+            legend:{
+                position:'top',
+            },
+            title:{
+                display: true,
+                text: "Breed Comparisons"
+            }
+        }
+    }
+
+    const labels = ['Weight', "Height"]
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                label:"Minimums",
+                data: mins,
+                backgroundColor: 'rgb(34,139,34)',
+            },
+            {
+                label: props.dog.name,
+                data: [props.dog.weight, props.dog.height],
+                backgroundColor: 'rgb(0,0,128)',
+            },
+            {
+                label: "Maxes",
+                data: maxes,
+                backgroundColor: 'rgb(80, 32, 40)',
+            },
+        ],
+    }
+    return <Bar options={options} data={data} />
 }

@@ -15,7 +15,7 @@ export default function ChartDisplay(props){
         case 'Weight Changes':
             return <StatCharts chart={props.chart} id={props.dog.id} />
         case 'Breed Comparison':
-            return <BreedComparisonChart dog={dog} />
+            return <BreedComparisonChart dog={props.dog} />
         default:
             return
     }

@@ -49,14 +49,14 @@ export default function ChartSelectionModal(props){
                 <Modal.Body className="modal-style" key="modal-body-dog-selection">
                     <div className="row" key="row-div-selection-dog">
                         <label 
-                            className="col-3 text-white d-flex justify-content-center"
+                            className="col-6 col-sm-4 text-white d-flex justify-content-center"
                             key="label-selection"
                             htmlFor="selection"
                         >
                             Select which dog
                         </label>
                         <select 
-                            className="col-3 text-white modal-style" 
+                            className="col-6 col-sm-4 text-white modal-style" 
                             key="dog-select" 
                             name="selection" 
                             id="selection" 
@@ -74,7 +74,7 @@ export default function ChartSelectionModal(props){
                         ))}
                         </select>
                         <label 
-                            className="col-4 col-sm-4 text-white d-flex justify-content-center"
+                            className="col-6 col-sm-4 text-white d-flex justify-content-center"
                             key="chart-selection"
                             htmlFor="selection"
                         >
