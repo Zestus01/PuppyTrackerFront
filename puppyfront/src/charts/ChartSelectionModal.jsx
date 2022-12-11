@@ -66,7 +66,7 @@ export default function ChartSelectionModal(props){
                                 <>
                                     <option 
                                         key={"selection-" + dog} 
-                                        value={[dog.id, dog.name, dog.weight, dog.height]}
+                                        value={[dog.id, dog.name, dog.weight, dog.height, dog.breed[0], dog.gender]}
                                     >
                                             {dog.name}
                                     </option>

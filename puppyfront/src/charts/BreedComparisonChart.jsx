@@ -23,42 +23,45 @@ export default function BreedComparisonChart(props){
         Title,
         Tooltip,
         Legend
-    )
-    let dogData = (state.dogData ? state.dogData : []);
-    console.log(dogData);
-    console.log(props.id);
+    );
     useEffect(() => {
         async function getData(props) {
             let options = {
-                url: "breed/" + props.dog.breed,
+                url: "breed/",
                 method: "GET",
+                params: {
+                    name: props.breed,
+                  },
             };
         let resp = await request(options);
-        setBreedData(resp.data);
+        setBreedData(resp.data[0]);
         }
         getData({...props});
     }, [props]);
-    
+
+
     let minWeight, minHeight, maxHeight, maxWeight;
-    for(const [key, value] of Object.entries(breedData)){
-        if(key.includes(props.dog.gender.toLowerCase())){
-            if(key.includes('min_weight')){
-                minWeight = value
+    console.log(breedData);
+    console.log(props.gender.toLowerCase())
+    for(let item of Object.keys(breedData)){
+        console.log(breedData[item])
+        if(item.includes(props.gender.toLowerCase())){
+            if(item.includes('min_weight')){
+                minWeight = breedData[item];
             }
-            if(key.includes('min_height')){
-                minHeight = value
+            if(item.includes('min_height')){
+                minHeight = breedData[item];
             }
-            if(key.includes('max_weight')){
-                maxWeight = value
+            if(item.includes('max_weight')){
+                maxWeight = breedData[item];
             }
-            if(key.includes('max_height')){
-                maxHeight = value
+            if(item.includes('max_height')){
+                maxHeight = breedData[item];
             }
         }
     }
     let mins = [minWeight, minHeight];
     let maxes = [maxWeight, maxHeight];
-
     const options = {
         responsive: true,
         plugins: {
@@ -67,7 +70,7 @@ export default function BreedComparisonChart(props){
             },
             title:{
                 display: true,
-                text: "Breed Comparisons"
+                text: "Breed Comparisons for" + props.name
             }
         }
     }
@@ -83,8 +86,8 @@ export default function BreedComparisonChart(props){
                 backgroundColor: 'rgb(34,139,34)',
             },
             {
-                label: props.dog.name,
-                data: [props.dog.weight, props.dog.height],
+                label: props.name,
+                data: [props.weight, props.height],
                 backgroundColor: 'rgb(0,0,128)',
             },
             {
