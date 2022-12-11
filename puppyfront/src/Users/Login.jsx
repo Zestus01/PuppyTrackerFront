@@ -3,6 +3,7 @@ import AuthService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../context/GlobalState";
 import jwtDecode from "jwt-decode";
+import toast, {Toaster} from 'react-hot-toast';
 
 const Login = () => {
   let navigate = useNavigate();
@@ -23,8 +24,10 @@ const Login = () => {
         currentUserToken: resp.access,
         currentUser: data,
       });
+      toast.success("Welcome " + userRef.current.value);
       navigate("/home/dog/");
-    });
+    })
+    .catch(error => toast.error("Username or password incorrect!"))
   };
 
   async function handleRegister(e){
@@ -34,8 +37,11 @@ const Login = () => {
         password: pass2Ref.current.value,
         firstName: nameRef.current.value,
       }
-      AuthService.register(user);
-      navigate("/home/dog/");
+        console.log(AuthService.register(user));
+        toast.success("User registered")
+        navigate("/home/dog/");
+    } else {
+      toast.error("Passwords do not match")
     }
   };
 
@@ -101,6 +107,7 @@ const Login = () => {
             </div>
         </div>
     </div>
+    <Toaster />
   </div>
   );
 };

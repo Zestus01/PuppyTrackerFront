@@ -1,6 +1,6 @@
 import request from "../services/api.requests";
 import Modal from 'react-bootstrap/Modal';
-
+import toast, {Toaster} from 'react-hot-toast';
 
 export default function DogDelete(props){
 
@@ -14,8 +14,13 @@ export default function DogDelete(props){
             url: "edit/dog/" + props.id + '/',
             method: "DELETE",
         };
-        await request(options);
-        handleClose({...props});
+        try{
+            await request(options);
+            toast.success("Deletion successful")
+            handleClose({...props});
+        } catch(error){
+            toast.error("Deletion failed")
+        }
     }
 
 
@@ -66,6 +71,7 @@ export default function DogDelete(props){
                     >
                         Close
                     </button>
+                    <Toaster />
                 </Modal.Footer>
             </Modal>
 
