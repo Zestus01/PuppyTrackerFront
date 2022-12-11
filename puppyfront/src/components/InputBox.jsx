@@ -3,13 +3,49 @@ import { useGlobalState } from '../context/GlobalState';
 import request from '../services/api.requests';
 import { useNavigate} from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
-
+import toast, {Toaster} from 'react-hot-toast';
 
 
 export default function InputBox(props){
     const [state] = useGlobalState();
     const [rerender, setRerender] = useState(true);
     const [breedList, setBreedList] = useState([]);
+    
+    const nameRef = useRef(null);
+    const weightRef = useRef(null);
+    const heightRef = useRef(null);
+    const genderRef = useRef(null);
+    const ageRef = useRef(null);
+    const breedRef = useRef(null);
+
+    let boxNames = ['Dog Name', 'Weight: Pounds', 'Height: Inches', "Age"] 
+    let boxRefs = [nameRef, weightRef, heightRef, ageRef]
+    let radioNames = ['Male', 'Female']
+
+    function handleError(){
+        let index = 0;
+        for(let ref of boxRefs){
+            if(ref.current.value === ''){
+                toast.error('Please put in a value for ' + boxNames[index]);
+                return false;
+            }
+            index ++;
+        }
+        if(isNaN(weightRef.current.value) || isNaN(heightRef.current.value)){
+            toast.error("Please put in numerical value for weight or height");
+            return false;
+        } else if(parseFloat(weightRef.current.value) > 300 || parseFloat(heightRef.current.value) > 100){
+            toast.error("Please put in a valid data for weight or height. Weight 1-300, Height 1-100");
+            return false;
+        }else if(parseFloat(weightRef.current.value) <= 0 || parseFloat(heightRef.current.value) <= 0){
+            toast.error("Please put in a positive number")
+            return false;
+        }else if(isNaN(ageRef.current.value) || parseInt(ageRef.current.value) > 30 || parseInt(ageRef.current.value) < 0){
+            toast.error("Please put in a valid number for age 0-30");
+            return false;
+        }
+        return true;
+    }
 
     useEffect(() => {
         async function getData() {
@@ -26,35 +62,27 @@ export default function InputBox(props){
     let navigate = useNavigate();
 
     async function sendData(props) {
-        let dogObject = {
-            name: nameRef.current.value,
-            gender: genderRef.current.value,
-            weight: parseFloat(weightRef.current.value),
-            height: parseFloat(heightRef.current.value),
-            age: ageRef.current.value,
-            breed: [breedRef.current.value],
-            owner: [state.currentUser.user_id],
-        };
-        let options = {
-        url: "dog/",
-        method: "POST",
-        data: {
-            ...dogObject
+        if(handleError()){
+            let dogObject = {
+                name: nameRef.current.value,
+                gender: genderRef.current.value,
+                weight: parseFloat(weightRef.current.value),
+                height: parseFloat(heightRef.current.value),
+                age: parseInt(ageRef.current.value),
+                breed: [breedRef.current.value],
+                owner: [state.currentUser.user_id],
+            };
+            let options = {
+            url: "dog/",
+            method: "POST",
+            data: {
+                ...dogObject
+            }
+            };
+            await request(options);
         }
-        };
-        await request(options);
     }
     
-    const nameRef = useRef(null);
-    const weightRef = useRef(null);
-    const heightRef = useRef(null);
-    const genderRef = useRef(null);
-    const ageRef = useRef(null);
-    const breedRef = useRef(null);
-
-    let boxNames = ['Dog Name', 'Weight: Pounds', 'Height: Inches', "Age"] 
-    let boxRefs = [nameRef, weightRef, heightRef, ageRef]
-    let radioNames = ['Male', 'Female']
     
     function handleSubmit(props){
         sendData();
@@ -168,6 +196,7 @@ export default function InputBox(props){
                     >
                         Close
                     </button>
+                    <Toaster />
                 </Modal.Footer>
             </Modal>
     )

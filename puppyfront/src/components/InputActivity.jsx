@@ -1,14 +1,29 @@
 import { useGlobalState } from "../context/GlobalState";
 import request from "../services/api.requests";
 import React, { useRef } from "react";
-
+import toast, {Toaster} from 'react-hot-toast';
 import Modal from 'react-bootstrap/Modal'
 
 
 export default function InputActivity(props){
   const [state] = useGlobalState();
 
+  function errorHandle(){
+    if(activRef.current.value === 'Food' || activRef.current.value === 'Walk' || activRef.current.value === 'Playtime'){
+      if(isNaN(amountRef.current.value)){
+        toast.error('Please put in a number for amount');
+        return false;
+      }
+    }
+    if(amountRef.current.value === ''){
+      toast.error("Please fill in the amount section")
+      return false;
+    }
+    return true;
+  }
+
   function handleData(props){
+    if(errorHandle()){
       let dataObj = {
         dog: props.id,
         amount: amountRef.current.value,
@@ -25,6 +40,7 @@ export default function InputActivity(props){
       }
       handleClose({...props})
     }
+  }
 
   async function sendData(dataObj, props) {
       let options = {
@@ -34,9 +50,16 @@ export default function InputActivity(props){
             ...dataObj
         },
       };
+    try{
       await request(options);
+      toast.success('Activity inputted successful!');
       handleClose({...props});
+    } catch (error){
+      toast.error(
+        'An error happened, please double check inputs and try again please'
+      )
     }
+  }
     
   function handleClose(props){
       props.setShow(false);
@@ -144,6 +167,7 @@ export default function InputActivity(props){
             Close
           </button>
         </Modal.Footer>
+        <Toaster />
     </Modal>
   );
 }

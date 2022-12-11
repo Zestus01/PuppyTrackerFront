@@ -1,7 +1,7 @@
 import request from "../services/api.requests";
 import Modal from 'react-bootstrap/Modal';
 import {useRef} from 'react';
-
+import toast, {Toaster} from 'react-hot-toast';
 
 export default function DogEdit(props){
     
@@ -35,9 +35,14 @@ export default function DogEdit(props){
                 ...dataObj
             },
             
-        };
-        await request(options);
-        handleClose({...props});
+        }
+        try{
+            await request(options);
+            toast.success("Dog successfully updated")
+            handleClose({...props});
+        } catch(error){
+            toast.error("Edit failed")
+        }
     }
 
     function handleSubmit(props){
@@ -127,6 +132,7 @@ export default function DogEdit(props){
                     >
                         Close
                     </button>
+                    <Toaster />
                 </Modal.Footer>
             </Modal>
     )

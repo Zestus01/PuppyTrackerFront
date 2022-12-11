@@ -41,9 +41,8 @@ function App() {
       <Route path="/home/" element={<Header />} >
         <Route path="dog/" element={<DogDisplay />} />
         <Route path="chart/" element={<ChartSelection />} />
-        <Route path="settings" element={<Settings />} >
-          <Route path="credits" element={<Credits />} />
-        </Route>
+        <Route path="settings" element={<Settings />} />
+        <Route path="credits" element={<Credits />} />
         <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>
