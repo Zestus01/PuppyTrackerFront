@@ -1,7 +1,7 @@
 import request from "../services/api.requests";
 import Modal from 'react-bootstrap/Modal';
 import {useRef} from 'react';
-import { useGlobalState } from "../context/GlobalState";
+
 
 export default function DogEdit(props){
     
@@ -23,7 +23,6 @@ export default function DogEdit(props){
             }
 
         };
-        console.log(options.body);
         await request(options);
 
     }

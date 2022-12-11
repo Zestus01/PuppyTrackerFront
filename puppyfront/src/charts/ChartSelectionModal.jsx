@@ -14,13 +14,12 @@ export default function ChartSelectionModal(props){
         'Breed Comparison'
     ];
     let dogData = (state.dogData ? state.dogData : []);
-
     function handleClose(props){
         props.setShow(false);
     }
 
     function handleSelection(props){
-        props.setDog(selectionRef.current.value);
+        props.setDog((selectionRef.current.value).split(','));
         props.setChart(chartRef.current.value);
         handleClose({...props});
     }
@@ -47,65 +46,68 @@ export default function ChartSelectionModal(props){
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="modal-style" key="modal-body-dog-selection">
-                    <div className="row" key="row-div-selection-dog">
-                        <label 
-                            className="col-6 col-sm-4 text-white d-flex justify-content-center"
-                            key="label-selection"
-                            htmlFor="selection"
-                        >
-                            Select which dog
-                        </label>
-                        <select 
-                            className="col-6 col-sm-4 text-white modal-style" 
-                            key="dog-select" 
-                            name="selection" 
-                            id="selection" 
-                            ref={selectionRef}
-                        >
-                        {dogData.map( (dog) => (
-                            <>
-                                <option 
-                                    key={"selection-" + dog} 
-                                    value={dog}
-                                >
-                                        {dog.name}
-                                </option>
-                            </>
-                        ))}
-                        </select>
-                        <label 
-                            className="col-6 col-sm-4 text-white d-flex justify-content-center"
-                            key="chart-selection"
-                            htmlFor="selection"
-                        >
-                            Select which chart
-                        </label>
-                        <select 
-                            className="col-6 col-sm-4 text-white modal-style" 
-                            key="chart-select" 
-                            name="selection" 
-                            id="selection" 
-                            ref={chartRef}
-                        >
-                        {chartChoices.map( (chart) => (
-                            <>
-                                <option 
-                                    key={"selection-" + chart} 
-                                    value={chart}
-                                >
-                                        {chart}
-                                </option>
-                            </>
-                        ))}
-                            
-                        </select>
-                        <button 
-                            className='btn col-6 col-sm-4 py-2 d-flex justify-content-end align-center' 
-                            key="button-submit-dog" 
-                            onClick={() => handleSelection({...props})}
-                        >
-                            Submit
-                        </button>
+                    <div className="container-fluid" key="row-div-selection-dog">
+                        <div className="row">
+                            <label 
+                                className="col-4 col-sm-6 text-white d-flex justify-content-center"
+                                key="label-selection"
+                                htmlFor="selection"
+                            >
+                                Select which dog
+                            </label>
+                            <select 
+                                className="col-8 col-sm-6 text-white modal-style" 
+                                key="dog-select" 
+                                name="selection" 
+                                id="selection" 
+                                ref={selectionRef}
+                            >
+                            {dogData.map( (dog) => (
+                                <>
+                                    <option 
+                                        key={"selection-" + dog} 
+                                        value={[dog.id, dog.name, dog.weight, dog.height]}
+                                    >
+                                            {dog.name}
+                                    </option>
+                                </>
+                            ))}
+                            </select>
+                            <label 
+                                className="col-4 col-sm-6 text-white d-flex justify-content-center"
+                                key="chart-selection"
+                                htmlFor="selection"
+                            >
+                                Select which chart
+                            </label>
+                            <select 
+                                className="col-8 col-sm-6 text-white modal-style" 
+                                key="chart-select" 
+                                name="selection" 
+                                id="selection" 
+                                ref={chartRef}
+                            >
+                            {chartChoices.map( (chart) => (
+                                <>
+                                    <option 
+                                        key={"selection-" + chart} 
+                                        value={chart}
+                                    >
+                                            {chart}
+                                    </option>
+                                </>
+                            ))}
+                            </select>
+                        </div>
+                        <div className="d-flex my-2 justify-content-end">
+                            <button 
+                                className='btn col-6 col-sm-4 py-2 align-center' 
+                                key="button-submit-dog" 
+                                onClick={() => handleSelection({...props})}
+                            >
+                                Submit
+                            </button>
+                        </div>
                     </div>
                 </Modal.Body>
                 <Modal.Footer className="modal-style" key="modal-footer-dog-input">

@@ -8,12 +8,12 @@ export default function ChartSelection(){
     const [chartDisplay, setChartDisplay] = useState('');
     const [dog, setDog] = useState(0);
 
-
+    
     return(
         <>
             <button key="dog-selection" className="btn" onClick={() => setChartModalShow(!chartModalShow)}>Select options</button>
             <ChartSelectionModal setDog={setDog} show={chartModalShow} setShow={setChartModalShow} setChart={setChartDisplay}/>
-            <ChartDisplay chart={chartDisplay} dog={dog}/>
+            <ChartDisplay chart={chartDisplay} dog={dog} />
         </>
     )
 }

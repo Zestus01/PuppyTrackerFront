@@ -32,7 +32,7 @@ export default function StatCharts(props){
     useEffect( () => {
         async function getData() {
             let options = {
-                url: chartCategory,
+                url: chartCategory + '/',
                 method: "GET",
                 params: {
                     dog__id: props.id,
@@ -48,9 +48,12 @@ export default function StatCharts(props){
     const statData = [];
     for(let item of dataArray){
         timeValues.push(formatInTimeZone(item.time, 'America/New_York', 'yyyy-MM-dd HH:mm:ss'));
-        statData.push([formatInTimeZone(item.time, 'America/New_York', 'yyyy-MM-dd HH:mm:ss'), item.weight]);
+        statData.push([formatInTimeZone(item.time, 'America/New_York', 'yyyy-MM-dd HH:mm:ss'), item[chartCategory]]);
     }
+    // Appends the current weight and height to stats
+    let nowDate = formatInTimeZone(new Date(), 'America/New_York', 'yyyy-MM-dd HH:mm:ss')
 
+    chartCategory === 'weight' ? statData.push([nowDate, props.weight]) : statData.push([nowDate, props.height]);
     const optionsChart = {
         responsive: true,
         plugins: {

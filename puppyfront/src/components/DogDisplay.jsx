@@ -38,7 +38,7 @@ export default function DogDisplay(props) {
       setDogData(resp.data);
     }
     getData();
-  }, []);
+  }, [state.currentUser.user_id, dispatch]);
 
   if (dogData.length === 0) {
     return;
@@ -47,38 +47,38 @@ export default function DogDisplay(props) {
       <div key="main-dog-div" className="row justify-content-center container-fluid">
         {dogData.map((dog, index) => (
           <h3 
-            key={new Date() + dog.id + index} 
-            className="App"
+          key={new Date() + dog.id + index} 
+          className="App"
           >
             {dog.name}
           
+            <div className="container-fluid row d-flex justify-content-center my-3">
+            {photoArray.map((buttonImage, index2) => {
+              return(
+                <input 
+                type="image"
+                alt={selectedOptions[index2]} 
+                key={"activity-modal" + index + index2 + dog.id} 
+                className={"imgBtn col-1 col-sm-4 mx-2 header-im " + buttonStyleClass[index2]} 
+                src={buttonImage} 
+                onClick={() => {
+                  setSelected(selectedOptions[index2]);
+                  setDogID(dog.id);
+                  setActivityShow(true);
+                }}
+                />
+                )})}
+            </div>
             <ActivityDisplay 
               id={dog.id} 
-            />
+              />
             <InputActivity 
               setShow={setActivityShow} 
               show={activityShow} 
               id={dogID}
               selection={selected} 
-            />
-            <div className="container-fluid row d-flex justify-content-center my-3">
-            {photoArray.map((buttonImage, index2) => {
-              return(
-                  <input 
-                    type="image"
-                    alt={selectedOptions[index2]} 
-                    key={"activity-modal" + index + index2 + dog.id} 
-                    className={"imgBtn col-1 col-sm-4 mx-2 header-im " + buttonStyleClass[index2]} 
-                    src={buttonImage} 
-                    onClick={() => {
-                      setSelected(selectedOptions[index2]);
-                      setDogID(dog.id);
-                      setActivityShow(true);
-                    }}
-                  />
-              )})}
-            </div>
-          </h3>
+              />
+            </h3>
         ))}
         <div className="container row d-flex justify-content-center">
           <button 
