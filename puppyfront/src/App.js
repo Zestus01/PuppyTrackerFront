@@ -10,11 +10,15 @@ import Settings from './components/Settings';
 import Profile from './Users/Profile'
 import Header from './components/Header';
 import Credits from './components/Credits';
+import ChartSelection from './charts/ChartSelection';
+
+
+// Think about using links to navigate backwards instead of navigates
 
 
 function App() {
-  const [dispatch ] = useGlobalState();
-
+  const [,dispatch ] = useGlobalState();
+  
   // Loads in the activity list 
   useEffect(() => {
     async function getData() {
@@ -36,6 +40,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/home/" element={<Header />} >
         <Route path="dog/" element={<DogDisplay />} />
+        <Route path="chart/" element={<ChartSelection />} />
         <Route path="settings" element={<Settings />} >
           <Route path="credits" element={<Credits />} />
         </Route>
@@ -46,3 +51,4 @@ function App() {
 }
 
 export default App;
+

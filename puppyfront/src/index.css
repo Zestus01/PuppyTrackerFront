@@ -14,6 +14,13 @@ body {
 	overflow-x: hidden;
 }
 
+html, body{
+  background-color: #2a2b38 !important;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg') !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -318,16 +325,16 @@ h6 span{
 }
 
 .imgBtn{
-  height: 10vh;
-  width: 8vh;
+  height: 10vw !important;
+  width: 10vw !important;
 }
 
 .foodBtn {
-  background-color: salmon;
+  background-color: rgb(250, 128, 114);
 }
 
 .foodBtn:hover{
-  background-color: darkred;
+  background-color: rgb(139, 0, 0);
 }
 
 .bathroomBtn {
@@ -335,21 +342,22 @@ h6 span{
 }
 
 .bathroomBtn:hover{
-  background-color: forestgreen;
+  background-color: rgb(34, 139, 34);
 }
 
 .walkBtn{
-  background-color: skyblue;
+  background-color: rgb(150, 225, 255)
 }
 
 .walkBtn:hover{
-  background-color: steelblue;
+  background-color: rgb(70, 130, 180);
 }
 
 .playBtn{
-  background-color: pink;
+  background-color: rgb(255, 192, 203);
 }
 
 .playBtn:hover{
-  background: orchid;
+  background: rgb(218, 112, 214);
 }
+

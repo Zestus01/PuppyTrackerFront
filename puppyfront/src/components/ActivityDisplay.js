@@ -2,8 +2,6 @@ import request from "../services/api.requests";
 import {useEffect ,useState} from "react";
 import { formatInTimeZone } from 'date-fns-tz'
 
-
-
 function formatDate(time){
     return formatInTimeZone(time, 'America/New_York', 'yyyy-MM-dd HH:mm:ss zzz');
 }
@@ -16,13 +14,14 @@ function timeDifference(time, dateFormat, splitChar){
     nowDate = formatInTimeZone(nowDate, 'America/New_York', dateFormat).split(splitChar);
     for(let i = 0; i < time.length; i++){
             holder = (parseInt(nowDate[i]) - parseInt(time[i]));
-            if(holder < 0){
+            if(holder < 0 && i !== 0){
                 timeDiff[i - 1] -= 1;
                 holder += 60;
             }
+            holder = Math.abs(holder);
             timeDiff.push(holder);
     }
-    return timeDiff.join(':');
+    return timeDiff.join(splitChar);
 }
 
 
@@ -75,10 +74,10 @@ export default function ActivityDisplay(props){
     }, [props.id]);
 
     return (
-        <div key="main-activity-div" className="row my-2">
+        <div key="main-activity-div" className="row d-flex justify-content-center col-12 my-1">
             {Object.entries(activityArray).map( ([key, value]) =>{
                 return(
-                    <div key={key + 'div'} className="col-4 my-3">
+                    <div key={key + 'div'} className="col-12 col-sm-4 my-2">
                         <h5 key={"activity-h5" + key}>{key}</h5>
                         <SingleActivity activity={value} dogID={props.id}/>
                         <MultipleActivities activities={value} dogID={props.id}/>
@@ -123,8 +122,8 @@ function SingleActivity(props){
 }
 
 function MultipleActivities(props){
-
-
+    
+    const [open, setOpen] = useState(false);
     if (props.activities.length >= 2) {
         let items = props.activities.slice(1);
         return (
@@ -134,9 +133,10 @@ function MultipleActivities(props){
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target={"#" + items[0]["activities"]["name"]}
-                    aria-expanded="false"
+                    aria-expanded={open}
                     aria-controls={items[0]["activities"]["name"]}
                     key={props.dogID + items[0].time}
+                    onClick={() => setOpen(!open)}
                 >
                     More
                 </button>
@@ -160,3 +160,33 @@ function MultipleActivities(props){
         }
         
 }
+
+
+                // <button
+                //     onClick={() => setOpen(!open)}
+                //     aria-controls={"more-activities" + props.dogID + items[0]['activities']['name']}
+                //     aria-expanded={open}
+                //     className="btn col-4"
+                //     // data-bs-toggle="collapse"
+                //     // data-bs-target={"#" + items[0]["activities"]["name"]}
+                //     key={props.dogID + items[0].time}
+                // >
+                //     More
+                // </button>
+                // <Collapse
+                //     in={open} 
+                //     id={items[0]["activities"]["name"]}
+                // >
+                //     <div 
+                //         className="card card-body d-flex justify-content-center text-black"
+                //         id={"more-activities" + props.dogID + items[0]['activities']['name']}
+                //         key={props.dogID + items[0]['activities']['name']}
+                //     >
+                //         {items.map((item, index) => (
+                            
+                //             <p key={props.id + item.time}>
+                //                 {item['activities']["verb"]} {item.amount} {item['activities']["dimension"]} at {formatDate(item.time)}. It was {item.description}
+                //                 </p>
+                //         ))}
+                //     </div>
+                // </Collapse>

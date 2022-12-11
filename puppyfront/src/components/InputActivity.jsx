@@ -49,6 +49,7 @@ export default function InputActivity(props){
   let dimensionList = [];
   let selectedActivity = [];
   let placeholderItem;
+  
   if(state.activityList){
       state.activityList.map( (item) => {
         if(item.name !== props.selection){
@@ -116,7 +117,7 @@ export default function InputActivity(props){
           <div className="row container-fluid form-group">
             {activityNames.map((box, index) => (
                 <input
-                    className="form-style col-3"
+                    className="form-style col-6 col-sm-12"
                     id={box}
                     ref={reference[index]}
                     key={box}
@@ -127,7 +128,7 @@ export default function InputActivity(props){
             ))}
           </div>
           <button 
-            className='btn' 
+            className='btn col-4 col-sm-6' 
             onClick={() => handleData({...props})}
             key="modal-submit-btn"
           >
@@ -136,7 +137,7 @@ export default function InputActivity(props){
         </Modal.Body>
         <Modal.Footer className="modal-style">
           <button 
-            className="btn" 
+            className="btn col-4 col-sm-6" 
             onClick={() => handleClose({...props})}
             key="modal-close-btn"
           >

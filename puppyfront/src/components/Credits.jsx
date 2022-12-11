@@ -1,4 +1,5 @@
-
+// Dog breed info - https://api-ninjas.com/api/dogs
+// Dog breed list - https://github.com/ElliottLandsborough/dog-ceo-api
 
 export default function Credits(){
     
@@ -47,6 +48,15 @@ export default function Credits(){
           title="profile icons"
         >
           Profile icons created by Freepik - Flaticon
+        </a>
+        <a href="https://www.flaticon.com/free-icons/chart" title="chart icons">
+          Chart icons created by DinosoftLabs - Flaticon
+        </a>
+        <a href="https://www.flaticon.com/free-icons/construction-and-tools" title="construction and tools icons">
+          Construction and tools icons created by VectorPortal - Flaticon
+        </a>
+        <a href="https://www.flaticon.com/free-icons/user" title="user icons">
+          User icons created by kmg design - Flaticon
         </a>
       </>
     );

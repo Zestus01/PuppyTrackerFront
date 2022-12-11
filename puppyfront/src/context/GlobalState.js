@@ -33,5 +33,5 @@ export const GlobalProvider = ({ children }) => {
 
 export const useGlobalState = () => [
   useContext(GlobalStateContext),
-  useContext(DispatchStateContext)
+  useContext(DispatchStateContext),
 ];

@@ -6,7 +6,7 @@ import jwtDecode from "jwt-decode";
 
 const Login = () => {
   let navigate = useNavigate();
-  const [dispatch] = useGlobalState();
+  const [,dispatch] = useGlobalState();
 
   const passRef = useRef(null);
   const userRef = useRef(null);
@@ -17,7 +17,6 @@ const Login = () => {
   let user = {};
 
   const handleLogin = (e) => {
-    
     AuthService.login(userRef.current.value, passRef.current.value).then(async (resp) => {
       let data = jwtDecode(resp.access);
       await dispatch({
@@ -33,17 +32,10 @@ const Login = () => {
       user = {
         username: user2Ref.current.value,
         password: pass2Ref.current.value,
-        first_name: nameRef.current.value,
+        firstName: nameRef.current.value,
       }
-      await AuthService.register(user);
-      AuthService.login(user2Ref.current.value, pass2Ref.current.value).then(async (resp) => {
-        let data = jwtDecode(resp.access);
-        await dispatch({
-          currentUserToken: resp.access,
-          currentUser: data,
-        });
-        navigate("/home/dog/");
-      });
+      AuthService.register(user);
+      navigate("/home/dog/");
     }
   };
 

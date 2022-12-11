@@ -10,16 +10,6 @@ import dogPoop from '../img/dogPoop.png';
 import dogMan from '../img/dogMan.png';
 // import dogWoman from '../img/dogWoman.png';
 
-
-// function breedString(breeds) {
-//   let breedStr = "";
-//   breeds.map((breed) => {
-//     breedStr += breed + " ";
-//     return;
-//   });
-//   return breedStr;
-// }
-
 export default function DogDisplay(props) {
   const [state, dispatch] = useGlobalState();
   const [dogData, setDogData] = useState([]);
@@ -27,6 +17,7 @@ export default function DogDisplay(props) {
 
   const [dogShow, setDogShow] = useState(false);
   const [activityShow, setActivityShow] = useState(false);
+  const [dogID, setDogID] = useState(0);
   let selectedOptions = ['Food', 'Pee', 'Walk', 'Playtime']; 
   let photoArray = [dogFood, dogPoop, dogMan, dogPlay]
   let buttonStyleClass = ['foodBtn', 'bathroomBtn', 'walkBtn', 'playBtn'];
@@ -47,51 +38,52 @@ export default function DogDisplay(props) {
       setDogData(resp.data);
     }
     getData();
-  }, [dispatch, state.currentUser.user_id]);
+  }, [state.currentUser.user_id, dispatch]);
 
   if (dogData.length === 0) {
     return;
   } else {
     return (
-      <div key="main-dog-div" className="row container-fluid">
+      <div key="main-dog-div" className="row justify-content-center container-fluid">
         {dogData.map((dog, index) => (
           <h3 
-            key={new Date() + dog.id + index} 
-            className="App"
+          key={new Date() + dog.id + index} 
+          className="App"
           >
             {dog.name}
           
-            <ActivityDisplay 
-              id={dog.id} 
-            />
-            <InputActivity 
-              setShow={setActivityShow} 
-              show={activityShow} 
-              id={dog.id}
-              selection={selected} 
-            />
             <div className="container-fluid row d-flex justify-content-center my-3">
             {photoArray.map((buttonImage, index2) => {
               return(
-                  <input 
-                    type="image"
-                    alt={selectedOptions[index2]} 
-                    key={"activity-modal" + index + index2} 
-                    className={"imgBtn col-2 mx-2 " + buttonStyleClass[index2]} 
-                    src={buttonImage} 
-                    onClick={() => {
-                      setSelected(selectedOptions[index2]);
-                      setActivityShow(true);
-                    }}
-                  />
-              )})}
+                <input 
+                type="image"
+                alt={selectedOptions[index2]} 
+                key={"activity-modal" + index + index2 + dog.id} 
+                className={"imgBtn col-1 col-sm-4 mx-2 header-im " + buttonStyleClass[index2]} 
+                src={buttonImage} 
+                onClick={() => {
+                  setSelected(selectedOptions[index2]);
+                  setDogID(dog.id);
+                  setActivityShow(true);
+                }}
+                />
+                )})}
             </div>
-          </h3>
+            <ActivityDisplay 
+              id={dog.id} 
+              />
+            <InputActivity 
+              setShow={setActivityShow} 
+              show={activityShow} 
+              id={dogID}
+              selection={selected} 
+              />
+            </h3>
         ))}
         <div className="container row d-flex justify-content-center">
           <button 
             key="new-dog-modal" 
-            className="btn p-1 col-6" 
+            className="btn p-1 col-8 col-sm-6" 
             onClick={() => setDogShow(true)}
           >
             New dog?
