@@ -37,8 +37,12 @@ const Login = () => {
         password: pass2Ref.current.value,
         firstName: nameRef.current.value,
       }
-        console.log(AuthService.register(user));
+        await AuthService.register(user);
+        userRef.current.value = user2Ref.current.value;
+        passRef.current.value = pass2ConfRef.current.value;
+        AuthService.login()
         toast.success("User registered")
+        
         navigate("/home/dog/");
     } else {
       toast.error("Passwords do not match")

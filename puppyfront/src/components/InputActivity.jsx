@@ -150,13 +150,15 @@ export default function InputActivity(props){
                 />
             ))}
           </div>
-          <button 
-            className='btn col-4 col-sm-6' 
-            onClick={() => handleData({...props})}
-            key="modal-submit-btn"
-          >
-            Submit
-          </button>
+          <div className="d-flex justify-content-end">
+            <button 
+              className='btn col-4 col-sm-6 text-center' 
+              onClick={() => handleData({...props})}
+              key="modal-submit-btn"
+              >
+              Submit
+            </button>
+          </div>
         </Modal.Body>
         <Modal.Footer className="modal-style">
           <button 

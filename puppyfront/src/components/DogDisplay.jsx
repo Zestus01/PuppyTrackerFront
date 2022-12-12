@@ -14,7 +14,7 @@ export default function DogDisplay(props) {
   const [state, dispatch] = useGlobalState();
   const [dogData, setDogData] = useState([]);
   const [selected, setSelected] = useState(''); // Helps with autopopulating the activity input
-
+  const [rerender, setRerender] = useState(false);
   const [dogShow, setDogShow] = useState(false);
   const [activityShow, setActivityShow] = useState(false);
   const [dogID, setDogID] = useState(0);
@@ -38,11 +38,7 @@ export default function DogDisplay(props) {
       setDogData(resp.data);
     }
     getData();
-  }, [state.currentUser.user_id, dispatch]);
-
-  if (dogData.length === 0) {
-    return;
-  } else {
+  }, [state.currentUser.user_id, dispatch, rerender]);
     return (
       <div key="main-dog-div" className="row justify-content-center container-fluid">
         {dogData.map((dog, index) => (
@@ -89,8 +85,7 @@ export default function DogDisplay(props) {
             New dog?
           </button>
         </div>
-        <InputBox show={dogShow} setShow={setDogShow}/>
+        <InputBox show={dogShow} setShow={setDogShow} render={rerender} setRerender={setRerender}/>
       </div>
     );
-  }
 }

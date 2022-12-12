@@ -11,31 +11,34 @@ export default function Header(props){
     <div className='body-style text-white'>
         <div className="container-fluid">
             <div className="row">
-                <div className="col-4">
-                <img
-                    className="header-img"
-                    src={dogHusky}
-                    alt="Logo"
-                    id="logo"
-                    onClick={() => {
-                    navigate("/home/dog");
-                    }}
-                />
-                <img
-                    className="header-img"
-                    src={bar_chartColor}
-                    alt="Chart"
-                    id="chart"
-                    onClick={() => navigate("/home/chart")}
-                />
+                <div className="col-4 flex">
+                    <img
+                        className="header-img"
+                        src={dogHusky}
+                        alt="Logo"
+                        id="logo"
+                        onClick={() => {
+                        navigate("/home/dog");
+                        }}
+                    />
+                    <img
+                        className="header-img"
+                        src={bar_chartColor}
+                        alt="Chart"
+                        id="chart"
+                        onClick={() => navigate("/home/chart")}
+                    />
                 </div>
-                <div className="col d-flex justify-content-end">
+                <div className="col-4 pt-4">
+                    <h3 className="text-center" onClick={() => navigate("/home/dog")}>Health Hound</h3>
+                </div>
+                <div className="col-4 d-flex justify-content-end">
                     <img
                         className="header-img"
                         src={userColor}
                         alt="User Icon"
                         onClick={() => navigate("/home/profile")}
-                    />
+                        />
                 </div>
             </div>
         </div>
