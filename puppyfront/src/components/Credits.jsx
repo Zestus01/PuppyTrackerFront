@@ -114,6 +114,7 @@ export default function Credits(){
             >
                 HTML,CSS, and Login provided by Ivan Grozdic 
               </a>
+              <br></br>
             <a
               href="https://github.com/ElliottLandsborough/dog-ceo-api"
               title="DogBreeds"
@@ -122,6 +123,7 @@ export default function Credits(){
             >
                 Dog breed list
               </a>
+              <br></br>
             <a
               href="https://api-ninjas.com/api/dogs"
               title="DogbreedInfo"

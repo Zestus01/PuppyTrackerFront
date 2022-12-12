@@ -1,6 +1,7 @@
 import request from "../services/api.requests";
 import {useEffect ,useState} from "react";
 import { formatInTimeZone } from 'date-fns-tz'
+import Accordion from 'react-bootstrap/Accordion';
 
 function formatDate(time){
     return formatInTimeZone(time, 'America/New_York', 'yyyy-MM-dd HH:mm:ss zzz');
@@ -80,7 +81,7 @@ export default function ActivityDisplay(props){
                     <div key={key + 'div'} className="col-12 col-sm-4 my-2">
                         <h5 key={"activity-h5" + key}>{key}</h5>
                         <SingleActivity activity={value} dogID={props.id}/>
-                        <MultipleActivities activities={value} dogID={props.id}/>
+                        <MultipleActivities activities={value} dogID={props.id} section={key}/>
                     </div>
                 )
             })}
@@ -103,9 +104,7 @@ function SingleActivity(props){
                 Last record is:
             </p>
             <p key={activity.name + "year diff"}>     
-                {timeDifference(activity.time, 'yyyy-MM-dd', '-')} YY-MM-DD
-            </p>
-            <p key={activity.name + "hour diff"}>
+                {timeDifference(activity.time, 'yyyy-MM-dd', '-')} YY-MM-DD &nbsp;
                 {timeDifference(activity.time, 'HH:mm:ss', ':')} HH:MM:SS ago
             </p>    
             
@@ -122,46 +121,56 @@ function SingleActivity(props){
 }
 
 function MultipleActivities(props){
-    
-    const [open, setOpen] = useState(false);
     if (props.activities.length >= 2) {
         let items = props.activities.slice(1);
         return (
-            <div>
-                <button
-                    className="btn col-4"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target={"#" + items[0]["activities"]["name"]}
-                    aria-expanded={open}
-                    aria-controls={items[0]["activities"]["name"]}
-                    key={props.dogID + items[0].time}
-                    onClick={() => setOpen(!open)}
-                >
-                    More
-                </button>
-                <div 
-                    className="collapse" 
-                    id={items[0]["activities"]["name"]}
-                >
-                    <div 
-                        className="card card-body d-flex justify-content-center text-black"
-                    >
-                        {items.map((item, index) => (
-                            
-                            <p key={props.id + item.time}>
-                                {item['activities']["verb"]} {item.amount} {item['activities']["dimension"]} at {formatDate(item.time)}. It was {item.description}
-                                </p>
-                        ))}
-                    </div>
-                </div>
-            </div>
+            <Accordion>
+                <Accordion.Item eventKey="0">
+                    <Accordion.Header>More</Accordion.Header>
+                    <Accordion.Body>
+                    {items.map((item, index) => (
+                        <p key={props.id + item.time}>
+                            {item['activities']["verb"]} {item.amount} {item['activities']["dimension"]} at {formatDate(item.time)}. It was {item.description}
+                        </p>
+                    ))}
+                    </Accordion.Body>
+                </Accordion.Item>
+            </Accordion>
             )
         }
         
-}
-
-
+    }
+    
+    // <div>
+    //     <button
+    //         className="btn col-4"
+    //         type="button"
+    //         data-bs-toggle="collapse"
+    //         data-bs-target={"#" + items[0]["activities"]["name"]}
+    //         aria-expanded={open}
+    //         aria-controls={items[0]["activities"]["name"]}
+    //         key={props.dogID + items[0].time}
+    //         onClick={() => setOpen(!open)}
+    //     >
+    //         More
+    //     </button>
+    //     <div 
+    //         className="collapse" 
+    //         id={items[0]["activities"]["name"]}
+    //     >
+    //         <div 
+    //             className="card card-body d-flex justify-content-center text-black"
+    //         >
+    //             {items.map((item, index) => (
+                    
+    //                 <p key={props.id + item.time}>
+    //                     {item['activities']["verb"]} {item.amount} {item['activities']["dimension"]} at {formatDate(item.time)}. It was {item.description}
+    //                     </p>
+    //             ))}
+    //         </div>
+    //     </div>
+    // </div>
+    
                 // <button
                 //     onClick={() => setOpen(!open)}
                 //     aria-controls={"more-activities" + props.dogID + items[0]['activities']['name']}

@@ -29,7 +29,7 @@ export default function Header(props){
                         onClick={() => navigate("/home/chart")}
                     />
                 </div>
-                <div className="col-4 pt-4">
+                <div className="col-4 md-pt-4">
                     <h3 className="text-center" onClick={() => navigate("/home/dog")}>Health Hound</h3>
                 </div>
                 <div className="col-4 d-flex justify-content-end">
@@ -38,7 +38,7 @@ export default function Header(props){
                         src={userColor}
                         alt="User Icon"
                         onClick={() => navigate("/home/profile")}
-                        />
+                    />
                 </div>
             </div>
         </div>

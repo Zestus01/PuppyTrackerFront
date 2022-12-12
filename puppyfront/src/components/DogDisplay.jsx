@@ -9,6 +9,7 @@ import dogPlay from '../img/dogPlay.png';
 import dogPoop from '../img/dogPoop.png';
 import dogMan from '../img/dogMan.png';
 // import dogWoman from '../img/dogWoman.png';
+import {Toaster} from 'react-hot-toast'
 
 export default function DogDisplay(props) {
   const [state, dispatch] = useGlobalState();
@@ -21,6 +22,7 @@ export default function DogDisplay(props) {
   let selectedOptions = ['Food', 'Pee', 'Walk', 'Playtime']; 
   let photoArray = [dogFood, dogPoop, dogMan, dogPlay]
   let buttonStyleClass = ['foodBtn', 'bathroomBtn', 'walkBtn', 'playBtn'];
+  
 
   useEffect(() => {
     async function getData() {
@@ -85,7 +87,8 @@ export default function DogDisplay(props) {
             New dog?
           </button>
         </div>
-        <InputBox show={dogShow} setShow={setDogShow} render={rerender} setRerender={setRerender}/>
+        <InputBox show={dogShow} setShow={setDogShow} rerender={rerender} setRerender={setRerender}/>
+        <Toaster />
       </div>
     );
 }

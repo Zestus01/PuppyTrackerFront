@@ -1,14 +1,15 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import AuthService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../context/GlobalState";
 import jwtDecode from "jwt-decode";
 import toast, {Toaster} from 'react-hot-toast';
+import Tutorial from "../components/Tutorial";
 
 const Login = () => {
   let navigate = useNavigate();
   const [,dispatch] = useGlobalState();
-
+  const [show, setShow] = useState(false);
   const passRef = useRef(null);
   const userRef = useRef(null);
   const user2Ref = useRef(null);
@@ -26,6 +27,7 @@ const Login = () => {
       });
       toast.success("Welcome " + userRef.current.value);
       navigate("/home/dog/");
+      window.location.reload();
     })
     .catch(error => toast.error("Username or password incorrect!"))
   };
@@ -42,8 +44,9 @@ const Login = () => {
         passRef.current.value = pass2ConfRef.current.value;
         AuthService.login()
         toast.success("User registered")
-        
+        setShow(true);
         navigate("/home/dog/");
+        window.location.reload();
     } else {
       toast.error("Passwords do not match")
     }
@@ -111,6 +114,7 @@ const Login = () => {
             </div>
         </div>
     </div>
+    <Tutorial show={show} setShow={setShow} />
     <Toaster />
   </div>
   );

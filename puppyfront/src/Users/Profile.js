@@ -1,18 +1,36 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import { useGlobalState } from "../context/GlobalState";
 import { useNavigate } from "react-router-dom";
 import DogDelete from "./DogDelete";
 import DogEdit from "./DogEdit";
-
+import request from "../services/api.requests";
 
 const Profile = () => {
-  const [state] = useGlobalState();
+  const [state, dispatch] = useGlobalState();
   let navigate = useNavigate();
 
   let dogData = (state.dogData ? state.dogData : []);
   const [showDelete, setDeleteShow] = useState(false);
   const [showEdit, setEditShow] = useState(false);
   const [stateDog, setStateDog] = useState(dogData[0]);
+  const [dogID, setDogID] = useState(0);
+
+  useEffect(() => {
+    async function getData() {
+      let options = {
+        url: "dog/",
+        method: "GET",
+        params: {
+          owner__id: state.currentUser.user_id,
+        },
+      };
+      let resp = await request(options);
+      await dispatch({
+        dogData: resp.data,
+      });
+    }
+    getData();
+  }, [state.currentUser.user_id, dispatch, ]);
 
   function logout(){
     localStorage.clear() 
@@ -43,21 +61,27 @@ const Profile = () => {
               </h2>
               <h5 key={"dog" + dog.id + dog.weight}> W: {dog.weight} </h5>
               <h5 key={dog.id + dog.weight}> H: {dog.height} </h5>
-              <button className="btn mx-2" key={"edit-btn" + dog.id + index} onClick={ () => {
-                setStateDog(dog);
-                handleEdit()
-              }}
-                >
+              <button 
+                className="btn mx-2" 
+                key={"edit-btn" + dog.id + index} 
+                onClick={ () => {
+                  setStateDog(dog);
+                  handleEdit()
+                }}
+              >
                   Edit
                 </button>
-              <button className="btn mx-2" key={"delete-btn" + dog.id + index} onClick={ () =>{
-                setStateDog(dog);
-                handleDelete();
-              }}
-                >
+              <button 
+                className="btn mx-2" 
+                key={"delete-btn" + dog.id + index} 
+                onClick={ () =>{
+                  setDogID(dog.id);
+                  handleDelete();
+                }}
+              >
                   DELETE
                 </button>
-              <DogDelete show={showDelete} setShow={setDeleteShow} id={stateDog.id} />
+              <DogDelete show={showDelete} setShow={setDeleteShow} id={dogID} />
               <DogEdit show={showEdit} setShow={setEditShow} dog={stateDog} />
             </div>    
           )

@@ -1,9 +1,11 @@
 import { useGlobalState } from "../context/GlobalState";
-import { useRef } from "react";
+import { useRef,useState } from "react";
 import {useNavigate } from "react-router-dom";
+import Tutorial from "./Tutorial";
 
 export default function Settings(){
     let navigate = useNavigate();
+    const [show, setShow] = useState(false);
     return(
         <div className="container vh-100 d-flex align-items-center" >
             <div className="row justify-content-center align-items-center text-center">
@@ -21,7 +23,9 @@ export default function Settings(){
                     </h6> 
                 </ul>
                 <button className="btn col-5 mx-2" onClick={() => navigate('/home/credits')}>Credits</button>
+                <button className="btn col-5 mx-2" onClick={() => setShow(!show)}>Tutorial</button>
                 <button className="btn col-5 mx-2" onClick={() => navigate('/home/dog')}>Back</button>
+                <Tutorial show={show} setShow={setShow} />
             </div>
         </div>
     )

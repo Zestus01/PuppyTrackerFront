@@ -56,7 +56,7 @@ export default function InputBox(props){
           setBreedList(resp.data[0]['name']);
         }
         getData();
-      }, []);
+      }, [state.currentUser.user_id]);
 
 
     async function sendData(props) {
@@ -83,10 +83,12 @@ export default function InputBox(props){
     
     
     function handleSubmit(props){
-        sendData();
-        props.setRerender(!props.rerender);
-        handleClose();
-
+        if(handleError()){
+            sendData();
+            props.setRerender(!props.rerender);
+            toast.success("Dog submitted successful")
+            handleClose({...props});
+        }
     }
 
     function handleClose(props){

@@ -361,3 +361,9 @@ h6 span{
   background: rgb(218, 112, 214);
 }
 
+.tut-modal{
+  height: 75vh !important;
+}
+.tut-text{
+  background-color: rgba(16,39,112,.6) !important;
+}
