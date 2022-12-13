@@ -40,7 +40,7 @@ export default function DogDisplay(props) {
       setDogData(resp.data);
     }
     getData();
-  }, [state.currentUser.user_id, dispatch, rerender]);
+  }, [dispatch, rerender]);
     return (
       <div key="main-dog-div" className="row justify-content-center container-fluid">
         {dogData.map((dog, index) => (

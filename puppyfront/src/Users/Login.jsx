@@ -42,11 +42,7 @@ const Login = () => {
         await AuthService.register(user);
         userRef.current.value = user2Ref.current.value;
         passRef.current.value = pass2ConfRef.current.value;
-        AuthService.login()
-        toast.success("User registered")
-        setShow(true);
-        navigate("/home/dog/");
-        window.location.reload();
+        toast.success("User registered, please proceed to login")
     } else {
       toast.error("Passwords do not match")
     }
@@ -60,8 +56,8 @@ const Login = () => {
           <div className="col-12 text-center align-self-center py-5">
             <div className="section pb-5 pt-5 pt-sm-2 text-center">
               <h6 className="mb-0 pb-3">
-                <span>Log In </span>
-                <span>Sign Up</span>
+                <label htmlFor="reg-log"><span>Log In</span></label>
+                <label htmlFor="reg-log"><span>Sign Up</span></label>
               </h6>
               <input className="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
               <label htmlFor="reg-log"/>
