@@ -126,7 +126,7 @@ function MultipleActivities(props){
         return (
             <Accordion>
                 <Accordion.Item eventKey="0">
-                    <Accordion.Header>More</Accordion.Header>
+                    <Accordion.Header className="text-center">More</Accordion.Header>
                     <Accordion.Body>
                     {items.map((item, index) => (
                         <p key={props.id + item.time}>

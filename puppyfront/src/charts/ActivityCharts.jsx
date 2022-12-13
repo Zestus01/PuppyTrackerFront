@@ -81,9 +81,9 @@ export default function ActivityCharts(props){
     }
 
     return (
-        <>
+        <div className="d-flex justify-content-center chart-display">
             <Doughnut data={pieData} />
-        </>
+        </div>
     )
 }
 

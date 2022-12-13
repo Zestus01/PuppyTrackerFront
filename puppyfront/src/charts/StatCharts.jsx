@@ -75,5 +75,9 @@ export default function StatCharts(props){
             },
         ]
     }
-    return <Line options={optionsChart} data={data} />
+    return (
+        <div className="d-flex justify-content-center chart-display">
+            <Line options={optionsChart} data={data} />
+        </div>
+    )
 }

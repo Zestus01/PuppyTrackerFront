@@ -96,5 +96,10 @@ export default function BreedComparisonChart(props){
             },
         ],
     }
-    return <Bar options={options} data={data} />
+    return (
+            <div className="d-flex justify-content-center chart-display">
+                <Bar options={options} data={data} />
+            </div>   
+
+    )
 }

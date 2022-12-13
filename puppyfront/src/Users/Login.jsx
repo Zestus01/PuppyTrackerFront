@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../context/GlobalState";
 import jwtDecode from "jwt-decode";
 import toast, {Toaster} from 'react-hot-toast';
-import Tutorial from "../components/Tutorial";
+
 
 const Login = () => {
   let navigate = useNavigate();
@@ -110,7 +110,6 @@ const Login = () => {
             </div>
         </div>
     </div>
-    <Tutorial show={show} setShow={setShow} />
     <Toaster />
   </div>
   );

@@ -55,5 +55,9 @@ export default function DurationCharts(props){
         ],
     };
 
-    return <Doughnut data={chartData} />
+    return (
+        <div className="d-flex justify-content-center chart-display">
+            <Doughnut data={chartData} />
+        </div>
+    )
 }

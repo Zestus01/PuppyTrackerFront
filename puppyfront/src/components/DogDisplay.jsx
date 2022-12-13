@@ -10,8 +10,10 @@ import dogPoop from '../img/dogPoop.png';
 import dogMan from '../img/dogMan.png';
 // import dogWoman from '../img/dogWoman.png';
 import {Toaster} from 'react-hot-toast'
+import Tutorial from "./Tutorial"; 
 
 export default function DogDisplay(props) {
+
   const [state, dispatch] = useGlobalState();
   const [dogData, setDogData] = useState([]);
   const [selected, setSelected] = useState(''); // Helps with autopopulating the activity input
@@ -19,6 +21,7 @@ export default function DogDisplay(props) {
   const [dogShow, setDogShow] = useState(false);
   const [activityShow, setActivityShow] = useState(false);
   const [dogID, setDogID] = useState(0);
+  const [tutShow, setTutShow] = useState(false);
   let selectedOptions = ['Food', 'Pee', 'Walk', 'Playtime']; 
   let photoArray = [dogFood, dogPoop, dogMan, dogPlay]
   let buttonStyleClass = ['foodBtn', 'bathroomBtn', 'walkBtn', 'playBtn'];
@@ -38,9 +41,13 @@ export default function DogDisplay(props) {
         dogData: resp.data,
       });
       setDogData(resp.data);
+      if(resp.data.length === 0){
+        setTutShow(true);
+      }
     }
     getData();
   }, [dispatch, rerender]);
+
     return (
       <div key="main-dog-div" className="row justify-content-center container-fluid">
         {dogData.map((dog, index) => (
@@ -88,6 +95,7 @@ export default function DogDisplay(props) {
           </button>
         </div>
         <InputBox show={dogShow} setShow={setDogShow} rerender={rerender} setRerender={setRerender}/>
+        <Tutorial show={tutShow} setShow={setTutShow} />
         <Toaster />
       </div>
     );

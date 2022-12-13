@@ -367,3 +367,7 @@ h6 span{
 .tut-text{
   background-color: rgba(16,39,112,.6) !important;
 }
+
+.chart-display{
+  height: 70vh !important;
+}
