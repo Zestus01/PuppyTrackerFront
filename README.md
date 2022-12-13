@@ -1,4 +1,1 @@
-# Awesome Inc Web Developer Bootcamp React Template
-```
-npx create-react-app app --template file:.template
-```
+## Live Product: https://health-hound.web.app
