@@ -40,8 +40,8 @@ export default function BreedComparisonChart(props){
 
 
     let minWeight, minHeight, maxHeight, maxWeight;
-    console.log(breedData);
-    console.log(props.gender.toLowerCase())
+
+    // Parses the returned data, checks for gender than adds it the right variable 
     for(let item of Object.keys(breedData)){
         console.log(breedData[item])
         if(item.includes(props.gender.toLowerCase())){

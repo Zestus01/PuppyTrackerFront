@@ -17,15 +17,15 @@ export default function DogDisplay(props) {
   const [state, dispatch] = useGlobalState();
   const [dogData, setDogData] = useState([]);
   const [selected, setSelected] = useState(''); // Helps with autopopulating the activity input
-  const [rerender, setRerender] = useState(false);
+  const [rerender, setRerender] = useState(false);  // To rerender the page after a new dog
   const [dogShow, setDogShow] = useState(false);
   const [activityShow, setActivityShow] = useState(false);
   const [dogID, setDogID] = useState(0);
   const [tutShow, setTutShow] = useState(false);
+
   let selectedOptions = ['Food', 'Pee', 'Walk', 'Playtime']; 
   let photoArray = [dogFood, dogPoop, dogMan, dogPlay]
   let buttonStyleClass = ['foodBtn', 'bathroomBtn', 'walkBtn', 'playBtn'];
-  
 
   useEffect(() => {
     async function getData() {

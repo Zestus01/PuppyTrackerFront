@@ -7,7 +7,7 @@ import { BREED_URL, BREED_KEY } from "../services/auth.constants";
 export default function CheckAPI(props){
 
     let successfulAPI = "affenpinscher-airedale-akita-appenzeller-shepherd australian-Cattle dog australian-basenji-beagle-bluetick-borzoi-bouvier-boxer-briard-french bulldog-american bulldog-chihuahua-chow-clumber-border collie-bearded collie-coonhound-corgi-dachshund-dalmatian-scottish scottish deerhound-doberman-norwegian elkhound-entlebucher-eskimo-german shepherd-italian greyhound-havanese-afghan hound-basset hound-blood hound-ibizan hound-plott hound-husky-keeshond-kelpie-komondor-kuvasz-labrador-leonberg-lhasa-malamute-malinois-maltese-bull mastiff-tibetan mastiff-Bavarian mountain-bernese mountain-swiss mountain-newfoundland-otterhound-papillon-pembroke-miniature pinscher-german longhaired pointer-pomeranian-pug-pyrenees-redbone-chesapeake retriever-golden retriever-rhodesian rhodesian ridgeback-rottweiler-saluki-samoyed-schipperke-giant schnauzer-miniature schnauzer-italian segugio-english setter-gordon setter-irish setter-belgian sheepdog-english sheepdog-shetland sheepdog-shiba-cocker spaniel-sussex spaniel-english springer-airedale terrier-australian terrier-bedlington terrier-border terrier-cairn terrier-fox terrier-irish terrier-lakeland terrier-norfolk terrier-norwich terrier-russell terrier-scottish terrier-sealyham terrier-silky terrier-tibetan terrier-welsh terrier-wheaten terrier-yorkshire terrier-tervuren-vizsla-weimaraner-whippet-irish wolfhound"
-
+    
     let breedFields = [
         "max_height_male", 
         "max_height_female", 

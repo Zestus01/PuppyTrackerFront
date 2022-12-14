@@ -59,7 +59,7 @@ export default function ActivityCharts(props){
         datasets: [
             {
                 label: '# of Occurrences',
-                data: Object.values(activityCount),
+                data: Object.values(activityCount), // Gets values and returns an array
                 backgroundColor:[
                         'rgb(250, 128, 114)',
                         'rgb(4, 185, 4)',

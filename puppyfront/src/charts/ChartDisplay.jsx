@@ -4,9 +4,7 @@ import DurationCharts from './DurationCharts';
 import BreedComparisonChart from "./BreedComparisonChart";
 
 export default function ChartDisplay(props){
-    // let dogData = props.dog ? props.dog.split(',') : null;
-    // console.log("dog", props.dog);
-    // console.log(dogData);
+    // props.dog = [ID, name, weight, height, gender]
     switch(props.chart){
         case 'Activity Counts':
             return <ActivityCharts id={props.dog[0]} />

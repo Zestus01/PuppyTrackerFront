@@ -13,9 +13,6 @@ import Credits from './components/Credits';
 import ChartSelection from './charts/ChartSelection';
 
 
-// Think about using links to navigate backwards instead of navigates
-
-
 function App() {
   const [,dispatch ] = useGlobalState();
   
@@ -36,7 +33,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Login />} /> 
       <Route path="/register" element={<Register />} />
       <Route path="/home/" element={<Header />} >
         <Route path="dog/" element={<DogDisplay />} />

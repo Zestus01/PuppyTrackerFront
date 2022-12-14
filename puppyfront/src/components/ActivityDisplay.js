@@ -3,10 +3,12 @@ import {useEffect ,useState} from "react";
 import { formatInTimeZone } from 'date-fns-tz'
 import Accordion from 'react-bootstrap/Accordion';
 
+// Returns the given date into EST format
 function formatDate(time){
     return formatInTimeZone(time, 'America/New_York', 'yyyy-MM-dd HH:mm:ss zzz');
 }
 
+// Calculates the difference in time
 function timeDifference(time, dateFormat, splitChar){
     let nowDate = new Date();
     let timeDiff = [];
@@ -110,7 +112,7 @@ function SingleActivity(props){
             
             <p 
                 key={props.dogID + activity.name}
-            >
+            > 
                 {activityInstant["verb"]}&nbsp;
                 {activity.amount}&nbsp; 
                 {activityInstant["dimension"]} at&nbsp; 
@@ -141,61 +143,3 @@ function MultipleActivities(props){
         
     }
     
-    // <div>
-    //     <button
-    //         className="btn col-4"
-    //         type="button"
-    //         data-bs-toggle="collapse"
-    //         data-bs-target={"#" + items[0]["activities"]["name"]}
-    //         aria-expanded={open}
-    //         aria-controls={items[0]["activities"]["name"]}
-    //         key={props.dogID + items[0].time}
-    //         onClick={() => setOpen(!open)}
-    //     >
-    //         More
-    //     </button>
-    //     <div 
-    //         className="collapse" 
-    //         id={items[0]["activities"]["name"]}
-    //     >
-    //         <div 
-    //             className="card card-body d-flex justify-content-center text-black"
-    //         >
-    //             {items.map((item, index) => (
-                    
-    //                 <p key={props.id + item.time}>
-    //                     {item['activities']["verb"]} {item.amount} {item['activities']["dimension"]} at {formatDate(item.time)}. It was {item.description}
-    //                     </p>
-    //             ))}
-    //         </div>
-    //     </div>
-    // </div>
-    
-                // <button
-                //     onClick={() => setOpen(!open)}
-                //     aria-controls={"more-activities" + props.dogID + items[0]['activities']['name']}
-                //     aria-expanded={open}
-                //     className="btn col-4"
-                //     // data-bs-toggle="collapse"
-                //     // data-bs-target={"#" + items[0]["activities"]["name"]}
-                //     key={props.dogID + items[0].time}
-                // >
-                //     More
-                // </button>
-                // <Collapse
-                //     in={open} 
-                //     id={items[0]["activities"]["name"]}
-                // >
-                //     <div 
-                //         className="card card-body d-flex justify-content-center text-black"
-                //         id={"more-activities" + props.dogID + items[0]['activities']['name']}
-                //         key={props.dogID + items[0]['activities']['name']}
-                //     >
-                //         {items.map((item, index) => (
-                            
-                //             <p key={props.id + item.time}>
-                //                 {item['activities']["verb"]} {item.amount} {item['activities']["dimension"]} at {formatDate(item.time)}. It was {item.description}
-                //                 </p>
-                //         ))}
-                //     </div>
-                // </Collapse>
