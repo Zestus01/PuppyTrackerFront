@@ -39,10 +39,12 @@ const Login = () => {
         password: pass2Ref.current.value,
         firstName: nameRef.current.value,
       }
-        await AuthService.register(user);
-        userRef.current.value = user2Ref.current.value;
-        passRef.current.value = pass2ConfRef.current.value;
-        toast.success("User registered, please proceed to login")
+        await AuthService.register(user).then(async (resp) => {
+          userRef.current.value = user2Ref.current.value;
+          passRef.current.value = pass2ConfRef.current.value;
+          toast.success("User registered, please proceed to login")
+        })
+        .catch(error => toast.error("There is an account with that username already"));
     } else {
       toast.error("Passwords do not match")
     }
