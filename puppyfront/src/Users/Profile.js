@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DogDelete from "./DogDelete";
 import DogEdit from "./DogEdit";
 import request from "../services/api.requests";
+import toast, {Toaster} from 'react-hot-toast';
 
 const Profile = () => {
   const [state, dispatch] = useGlobalState();
@@ -38,15 +39,24 @@ const Profile = () => {
   }
 
   function handleEdit(){
-    setEditShow(true);
+    if(state.currentUser.username != "admin"){
+      setEditShow(true)
+    } else{
+      toast.error("Can't edit on demo account");
+    }
   }
 
   function handleDelete(){
-    setDeleteShow(true);
+    if(state.currentUser.username != "admin"){
+      setDeleteShow(true);
+    } else {
+      toast.error("Can't delete on demo account");
+    }
   }
 
   return (
     <div className="justify-content-center text-center col-12">
+      <Toaster />
       <h2 key="welcome" >Welcome {state.currentUser.username}</h2>
       <h2 key="username">{state.currentUser.username}</h2>
       <h2 key='names'>{state.currentUser.first_name} {state.currentUser.last_name}</h2>
