@@ -1,3 +1,5 @@
+# 03/15/23 I am aware of an issue with logging/creating users. Should be fixed by 03/16/23 afternoon
+
 ## Live Product: https://health-hound.web.app
 
 ## Backend Repository: https://github.com/Zestus01/PuppyTrackerBack
