@@ -33,6 +33,7 @@ export default function DogDisplay(props) {
         url: "dog/",
         method: "GET",
         params: {
+          // TODO: JavaScript convention is to use camel case to name variables. ie. ownerId
           owner__id: state.currentUser.user_id,
         },
       };
