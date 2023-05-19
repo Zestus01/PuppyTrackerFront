@@ -16,10 +16,11 @@ export default function Settings(){
             light and dark mode
             quick input
             possible profile picture
+            font size small or large
              - options base64 database storage, firestore, gravitar
             
         text of setting         off TOGGLE on
-
+        Overall layout of using h4 and h2 tags etc.
     */
     
     
@@ -37,9 +38,6 @@ export default function Settings(){
                 </Col>
             </Row>
             <Row className="my-3">
-                <Col xs='12'>
-                    <h5>Things to be developed:</h5>
-                </Col>
                 <Col>
                     <ul>
                         <li>
@@ -47,11 +45,9 @@ export default function Settings(){
                                 Gendered profile placeholder images
                             </h6>
                         </li>
-                        <li>
-                            <h6>
+                        <li className="h6">
                                 {/* TODO: this is ambiguous */}
                                 Text size increasing
-                            </h6>
                         </li>
                         <li>
                             <h6>
