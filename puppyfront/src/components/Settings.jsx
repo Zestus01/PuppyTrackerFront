@@ -17,7 +17,7 @@ export default function Settings(){
             quick input
             possible profile picture
             font size small or large
-             - options base64 database storage, firestore, gravitar
+            - options base64 database storage, firestore, gravitar
             
         text of setting         off TOGGLE on
         Overall layout of using h4 and h2 tags etc.
@@ -66,7 +66,7 @@ export default function Settings(){
                 </Col>
                 <Col xs='4'>
                     {/* TODO: this isn't actually a back button so consider removing or investigate how to use React Router or History API */}
-                    <button className="btn mx-2" onClick={() => navigate('/home/dog')}>Back</button>
+                    <button className="btn mx-2" onClick={() => navigate(-1)}>Back</button>
                 </Col>
             </Row>
             <Tutorial show={show} setShow={setShow} />
