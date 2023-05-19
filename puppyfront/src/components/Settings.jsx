@@ -1,3 +1,4 @@
+import { useGlobalState } from "../context/GlobalState";
 import { useState } from "react";
 import {useNavigate } from "react-router-dom";
 import Tutorial from "./Tutorial";
@@ -5,13 +6,32 @@ import { Col, Container, Row } from "react-bootstrap";
 
 export default function Settings(){
     let navigate = useNavigate();
-    const [show, setShow] = useState(false);
+    const [isShow, setisShow] = useState(false);
+    const [settings, setSettings] = useState();
+    
+    /*
+        Settings
+            pull in from cached global settings
+            set settings to chache settings 
+            light and dark mode
+            quick input
+            possible profile picture
+             - options base64 database storage, firestore, gravitar
+            
+        text of setting         off TOGGLE on
+
+    */
+    
+    
+    
+    
+    
     return(
         <Container className="my-5">
             <Row className="my-3">
                 <Col>
                     {/* TODO: why h5? */}
-                    <h5>Settings in development:</h5>
+                    <h3>Settings in development:</h3>
                     {/* TODO: Pull these from GitHub */}
                     {/* https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-api-to-manage-projects#finding-information-about-projects */}
                 </Col>
